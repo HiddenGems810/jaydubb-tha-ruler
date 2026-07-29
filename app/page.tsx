@@ -445,7 +445,7 @@ export default function Home() {
           </ul>
         </section>
 
-        <section className="seven-section" aria-labelledby="seven-title">
+        <section className="seven-section" id="the-7" aria-labelledby="seven-title">
           <div className="seven-image">
             <Image
               src="/images/jay-dubb/blue-jacket.jpg"
