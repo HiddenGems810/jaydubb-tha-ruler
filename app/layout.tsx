@@ -8,7 +8,11 @@ export async function generateMetadata(): Promise<Metadata> {
     requestHeaders.get("x-forwarded-host") ??
     requestHeaders.get("host") ??
     "jaydubbtharuler.com";
-  const protocol = requestHeaders.get("x-forwarded-proto") ?? "https";
+  const isLocalHost =
+    /^(localhost|127(?:\.\d+){3}|\[::1\])(?::\d+)?$/i.test(host);
+  const protocol = isLocalHost
+    ? "http"
+    : (requestHeaders.get("x-forwarded-proto") ?? "https");
   const base = new URL(`${protocol}://${host}`);
   const socialImage = new URL("/og.png", base).toString();
 

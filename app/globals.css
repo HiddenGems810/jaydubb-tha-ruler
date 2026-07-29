@@ -247,6 +247,7 @@ img {
   max-width: 8.6ch;
   margin: 0;
   font-size: clamp(6rem, 14.5vw, 14.5rem);
+  line-height: 0.9;
 }
 
 .hero h1 span {
@@ -768,6 +769,7 @@ img {
 .seven-image {
   position: relative;
   min-height: 52rem;
+  overflow: hidden;
 }
 
 .seven-image img {
@@ -810,6 +812,7 @@ img {
 .contact-image {
   position: relative;
   min-height: 52rem;
+  overflow: hidden;
 }
 
 .contact-image img {
