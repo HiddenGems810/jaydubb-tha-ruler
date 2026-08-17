@@ -1,5 +1,9 @@
 import Image from "next/image";
 import Link from "next/link";
+import { getAllPublishedShows } from "@/lib/supabase/queries";
+import { ShowsSection } from "@/components/shows-section";
+import { VipForm } from "@/components/vip-form";
+import { BookingForm } from "@/components/booking-form";
 
 const releases = [
   {
@@ -202,7 +206,8 @@ function Arrow() {
   return <span aria-hidden="true">↗</span>;
 }
 
-export default function Home() {
+export default async function Home() {
+  const shows = await getAllPublishedShows();
   return (
     <>
       <a className="skip-link" href="#main">
@@ -223,8 +228,8 @@ export default function Home() {
         <nav aria-label="Primary navigation">
           <a href="#music">Music</a>
           <a href="#video">Video</a>
+          <a href="#shows">Shows</a>
           <a href="#story">Story</a>
-          <a href="#live">Live</a>
           <a href="#press">Press</a>
           <a href="#vip">VIP Fan Club</a>
         </nav>
@@ -501,6 +506,9 @@ export default function Home() {
           </div>
         </section>
 
+        {/* Dynamic Database-Backed Shows Section */}
+        <ShowsSection shows={shows} />
+
         <section className="live-section section-dark" id="live" aria-labelledby="live-title">
           <div className="section-heading">
             <div className="section-marker">
@@ -679,33 +687,7 @@ export default function Home() {
                   Direct line to JayDubb Tha Ruler. Get early tour ticket links, unreleased track snippets, private merch discount codes, and live stream notifications.
                 </p>
               </div>
-              <form
-                className="vip-form"
-                action="mailto:booking@jaydubbtharuler.com?subject=VIP%20Fan%20Club%20Join"
-                method="post"
-                encType="text/plain"
-                data-fan-event="vip_signup_submit"
-              >
-                <label htmlFor="fan-email" className="sr-only">
-                  Enter your email address
-                </label>
-                <div className="vip-input-wrap">
-                  <input
-                    type="email"
-                    id="fan-email"
-                    name="email"
-                    required
-                    placeholder="Enter your email address"
-                    aria-label="Email address for VIP fan club"
-                  />
-                  <button type="submit" className="button button-primary">
-                    Join VIP <Arrow />
-                  </button>
-                </div>
-                <span className="vip-disclaimer">
-                  Zero spam. Direct artist drops only. Unsubscribe at any time.
-                </span>
-              </form>
+              <VipForm />
             </div>
           </div>
         </section>
@@ -734,6 +716,7 @@ export default function Home() {
             >
               booking@jaydubbtharuler.com <Arrow />
             </a>
+            <BookingForm />
           </div>
         </section>
       </main>
