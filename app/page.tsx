@@ -4,7 +4,6 @@ import { getAllPublishedShows } from "@/lib/supabase/queries";
 import { ShowsSection } from "@/components/shows-section";
 import { VipForm } from "@/components/vip-form";
 import { BookingForm } from "@/components/booking-form";
-import { ScrollAnimator } from "@/components/scroll-animator";
 
 const releases = [
   {
@@ -211,7 +210,6 @@ export default async function Home() {
   const shows = await getAllPublishedShows();
   return (
     <>
-      <ScrollAnimator />
       <a className="skip-link" href="#main">
         Skip to content
       </a>
