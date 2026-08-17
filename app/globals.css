@@ -800,18 +800,28 @@ img {
   display: grid;
   grid-template-columns: 1fr 1fr;
   min-height: 52rem;
-  background: var(--panel);
+  background: var(--ink);
+  color: var(--paper);
+  border-top: 1px solid var(--rule);
+  border-bottom: 1px solid var(--rule);
 }
 
 .seven-image {
   position: relative;
   min-height: 52rem;
   overflow: hidden;
+  background: #000;
 }
 
 .seven-image img {
   object-fit: cover;
   object-position: center top;
+  filter: brightness(1.08) contrast(1.08) saturate(1.1);
+  transition: transform 800ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.seven-image:hover img {
+  transform: scale(1.03);
 }
 
 .seven-copy {
@@ -820,42 +830,57 @@ img {
   justify-content: center;
   align-items: flex-start;
   padding: 6vw;
+  background: var(--ink);
+  color: var(--paper);
 }
 
 .seven-copy .eyebrow {
-  margin-top: 7rem;
+  margin-top: 6rem;
+  color: var(--accent);
+  letter-spacing: 0.16em;
 }
 
 .seven-copy h2 {
   margin: 0;
   font-size: clamp(8rem, 18vw, 18rem);
-  color: var(--red);
+  color: var(--accent);
+  line-height: 0.82;
+  text-shadow: 0 0 50px rgba(193, 18, 31, 0.35);
 }
 
 .seven-copy > p:not(.eyebrow) {
-  max-width: 30rem;
-  margin: 1.5rem 0 2rem;
+  max-width: 32rem;
+  margin: 1.5rem 0 2.5rem;
   font-size: 1.15rem;
   line-height: 1.65;
   letter-spacing: -0.015em;
+  color: #e5e7eb;
 }
 
 .contact-section {
   display: grid;
   grid-template-columns: 0.8fr 1.2fr;
   min-height: 52rem;
-  background: var(--paper);
-  color: var(--ink);
+  background: #08090c;
+  color: var(--paper);
+  border-top: 1px solid var(--rule);
 }
 
 .contact-image {
   position: relative;
   min-height: 52rem;
   overflow: hidden;
+  background: #000;
 }
 
 .contact-image img {
   object-fit: cover;
+  filter: brightness(1.05) contrast(1.15);
+  transition: transform 800ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.contact-image:hover img {
+  transform: scale(1.03);
 }
 
 .contact-copy {
@@ -863,31 +888,47 @@ img {
   flex-direction: column;
   justify-content: center;
   padding: 6vw;
+  background: #08090c;
+  color: var(--paper);
+}
+
+.contact-copy .eyebrow {
+  color: var(--accent);
+  letter-spacing: 0.16em;
 }
 
 .contact-copy h2 {
   margin: 0;
-  font-size: clamp(5rem, 10vw, 10rem);
+  font-size: clamp(4.5rem, 9.5vw, 9.5rem);
+  color: #ffffff;
+  line-height: 0.88;
+  text-transform: uppercase;
+  font-family: var(--font-display), Impact, sans-serif;
+  letter-spacing: -0.03em;
 }
 
 .contact-email {
   display: inline-flex;
   justify-content: space-between;
+  align-items: center;
   gap: 1rem;
-  margin-top: 4rem;
-  padding: 1.2rem 0;
-  border-top: 1px solid var(--ink);
-  border-bottom: 1px solid var(--ink);
+  margin-top: 2.5rem;
+  padding: 1.25rem 0;
+  border-top: 1px solid #23242c;
+  border-bottom: 1px solid #23242c;
   font-family: var(--font-mono), monospace;
-  font-size: clamp(0.72rem, 1.2vw, 1rem);
-  font-weight: 500;
+  font-size: clamp(0.78rem, 1.2vw, 1.05rem);
+  font-weight: 600;
   letter-spacing: 0.04em;
   text-transform: uppercase;
+  color: #ffffff;
+  transition: color 200ms ease, border-color 200ms ease;
 }
 
 .contact-email:hover,
 .contact-email:focus-visible {
-  color: var(--red);
+  color: var(--accent);
+  border-color: var(--accent);
 }
 
 /* VIP Fan Acquisition Section */
@@ -1298,8 +1339,8 @@ footer {
 
 @keyframes reveal-up {
   from {
-    opacity: 0;
-    transform: translateY(4rem);
+    opacity: 0.8;
+    transform: translateY(1.5rem);
   }
   to {
     opacity: 1;
@@ -1318,12 +1359,10 @@ footer {
 
 @keyframes image-reveal {
   from {
-    clip-path: inset(14% 14% 14% 14%);
-    opacity: 0.35;
-    transform: scale(0.94);
+    opacity: 0.85;
+    transform: scale(1.04);
   }
   to {
-    clip-path: inset(0);
     opacity: 1;
     transform: scale(1);
   }
@@ -1331,19 +1370,19 @@ footer {
 
 @keyframes image-drift {
   from {
-    transform: scale(1.1) translateY(2.5%);
+    transform: scale(1.05) translateY(1.5%);
   }
   to {
-    transform: scale(1) translateY(-2.5%);
+    transform: scale(1) translateY(-1.5%);
   }
 }
 
 @keyframes logo-drift {
   from {
-    transform: translate3d(8vw, -3rem, 0) rotate(-8deg);
+    transform: translate3d(6vw, -2rem, 0) rotate(-6deg);
   }
   to {
-    transform: translate3d(-4vw, 3rem, 0) rotate(-3deg);
+    transform: translate3d(-3vw, 2rem, 0) rotate(-2deg);
   }
 }
 
@@ -1355,13 +1394,11 @@ footer {
   .story-grid h2,
   .story-copy,
   .story-section blockquote,
-  .seven-copy > *,
-  .contact-copy > *,
   .footer-logo,
   .footer-grid {
     animation: reveal-up linear both;
     animation-timeline: view();
-    animation-range: entry 5% cover 32%;
+    animation-range: entry 0% cover 25%;
   }
 
   .section-heading,
@@ -1369,22 +1406,18 @@ footer {
   .video-notes {
     animation: reveal-line linear both;
     animation-timeline: view();
-    animation-range: entry 8% cover 36%;
+    animation-range: entry 5% cover 30%;
   }
 
   .manifesto-photo,
   .video-frame,
-  .live-image,
-  .seven-image,
-  .contact-image {
+  .live-image {
     animation: image-reveal linear both;
     animation-timeline: view();
-    animation-range: entry 8% cover 42%;
+    animation-range: entry 5% cover 35%;
   }
 
-  .manifesto-photo img,
-  .seven-image img,
-  .contact-image img {
+  .manifesto-photo img {
     animation: image-drift linear both;
     animation-timeline: view();
     animation-range: entry 0% exit 100%;
@@ -1394,7 +1427,7 @@ footer {
   .press-list li {
     animation: reveal-up linear both;
     animation-timeline: view();
-    animation-range: entry 0% cover 28%;
+    animation-range: entry 0% cover 20%;
   }
 
   .story-logo {
@@ -2116,29 +2149,38 @@ footer {
 
 .form-group label {
   font-family: var(--font-mono), monospace;
-  font-size: 0.72rem;
-  color: var(--muted);
+  font-size: 0.74rem;
+  color: #9ca3af;
   text-transform: uppercase;
-  letter-spacing: 0.06em;
+  letter-spacing: 0.08em;
+  font-weight: 600;
 }
 
 .form-group input,
 .form-group select,
 .form-group textarea {
-  padding: 0.85rem 1rem;
-  background: #08090b;
-  border: 1px solid var(--rule);
-  color: var(--paper);
+  padding: 0.95rem 1.15rem;
+  background: #111217;
+  border: 1px solid #282932;
+  color: #ffffff;
   font-family: var(--font-mono), monospace;
-  font-size: 0.82rem;
+  font-size: 0.86rem;
   outline: none;
-  transition: border-color 150ms ease;
+  border-radius: 0;
+  transition: border-color 200ms ease, box-shadow 200ms ease, background 200ms ease;
+}
+
+.form-group input::placeholder,
+.form-group textarea::placeholder {
+  color: #52535d;
 }
 
 .form-group input:focus,
 .form-group select:focus,
 .form-group textarea:focus {
-  border-color: var(--paper);
+  border-color: var(--accent);
+  background: #161720;
+  box-shadow: 0 0 0 1px var(--accent);
 }
 
 .form-error {

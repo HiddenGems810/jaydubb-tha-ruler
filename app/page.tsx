@@ -231,11 +231,12 @@ export default async function Home() {
           <a href="#shows">Shows</a>
           <a href="#story">Story</a>
           <a href="#press">Press</a>
-          <a href="#vip">VIP Fan Club</a>
+          <a href="#the-7">The 7</a>
+          <a href="#vip">VIP</a>
         </nav>
         <a
           className="header-cta"
-          href="mailto:booking@jaydubbtharuler.com?subject=Booking%20Inquiry%20-%20JayDubb%20Tha%20Ruler"
+          href="#contact"
           data-fan-event="booking_inquiry"
         >
           Book JayDubb <Arrow />
