@@ -34,6 +34,8 @@ test("server-renders the JayDubb artist hub", async () => {
   assert.match(html, /booking@jaydubbtharuler\.com/i);
   assert.match(html, /application\/ld\+json/i);
   assert.match(html, /Join The 7 VIP Fan Club/i);
+  assert.match(html, /Website Designed &amp; Developed by/i);
+  assert.match(html, /gerquiaabner\.com/i);
   assert.doesNotMatch(html, /\/_vinext\/image/);
   assert.doesNotMatch(html, /https:\/\/localhost/i);
   assert.doesNotMatch(html, /[A-Z]:\//);

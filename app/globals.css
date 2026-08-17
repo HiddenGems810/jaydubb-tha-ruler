@@ -1177,6 +1177,34 @@ footer {
   color: var(--red);
 }
 
+.footer-credits {
+  margin-top: 2rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  text-align: center;
+  font-family: var(--font-mono), monospace;
+  font-size: 0.68rem;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.footer-credits p {
+  margin: 0;
+}
+
+.footer-credits a {
+  color: var(--paper);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  transition: color 150ms ease;
+}
+
+.footer-credits a:hover,
+.footer-credits a:focus-visible {
+  color: var(--red);
+}
+
 @keyframes header-drop {
   from {
     opacity: 0;

@@ -265,6 +265,18 @@ export default function OffBrandPage() {
           </nav>
           <p>© {new Date().getFullYear()} JayDubb Tha Ruler</p>
         </div>
+        <div className="footer-credits">
+          <p>
+            Website Designed &amp; Developed by{" "}
+            <a
+              href="https://gerquiaabner.com"
+              target="_blank"
+              rel="noreferrer"
+            >
+              Ger&apos;Quia Abner
+            </a>
+          </p>
+        </div>
       </footer>
 
       <script
