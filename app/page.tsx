@@ -4,6 +4,7 @@ import { getAllPublishedShows } from "@/lib/supabase/queries";
 import { ShowsSection } from "@/components/shows-section";
 import { VipForm } from "@/components/vip-form";
 import { BookingForm } from "@/components/booking-form";
+import { ScrollAnimator } from "@/components/scroll-animator";
 
 const releases = [
   {
@@ -210,6 +211,7 @@ export default async function Home() {
   const shows = await getAllPublishedShows();
   return (
     <>
+      <ScrollAnimator />
       <a className="skip-link" href="#main">
         Skip to content
       </a>
@@ -513,7 +515,7 @@ export default async function Home() {
         <section className="live-section section-dark" id="live" aria-labelledby="live-title">
           <div className="section-heading">
             <div className="section-marker">
-              <span>04</span>
+              <span>05</span>
               <span>Live</span>
             </div>
             <div>
@@ -577,7 +579,7 @@ export default async function Home() {
             />
           </div>
           <div className="section-marker">
-            <span>05</span>
+            <span>06</span>
             <span>Origin</span>
           </div>
           <div className="story-grid">
@@ -613,7 +615,7 @@ export default async function Home() {
         <section className="press-section section-paper" id="press" aria-labelledby="press-title">
           <div className="section-heading section-heading-light">
             <div className="section-marker">
-              <span>06</span>
+              <span>07</span>
               <span>Coverage</span>
             </div>
             <div>
@@ -652,7 +654,7 @@ export default async function Home() {
           </div>
           <div className="seven-copy">
             <div className="section-marker">
-              <span>07</span>
+              <span>08</span>
               <span>The brand</span>
             </div>
             <p className="eyebrow">Artist-owned culture</p>
@@ -677,7 +679,7 @@ export default async function Home() {
         <section className="vip-fan-section section-dark" id="vip" aria-labelledby="vip-title">
           <div className="vip-container">
             <div className="section-marker">
-              <span>08</span>
+              <span>09</span>
               <span>Inner Circle</span>
             </div>
             <div className="vip-grid">
@@ -704,7 +706,11 @@ export default async function Home() {
             />
           </div>
           <div className="contact-copy">
-            <p className="eyebrow">Booking · Press · Brand Partnerships</p>
+            <div className="section-marker">
+              <span>10</span>
+              <span>Booking</span>
+            </div>
+            <p className="eyebrow" style={{ marginTop: "1rem" }}>Booking · Press · Brand Partnerships</p>
             <h2 id="contact-title">
               Bring the
               <br />

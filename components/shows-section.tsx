@@ -77,8 +77,14 @@ export function ShowsSection({ shows }: ShowsSectionProps) {
       )}
 
       <div className="section-heading">
-        <span className="eyebrow">04 · TOUR &amp; APPEARANCES</span>
-        <h2 id="shows-title">UPCOMING SHOWS</h2>
+        <div className="section-marker">
+          <span>04</span>
+          <span>Tour</span>
+        </div>
+        <div>
+          <p className="eyebrow">Upcoming shows &amp; appearances</p>
+          <h2 id="shows-title">On stage.</h2>
+        </div>
         <a href="#vip" className="text-link" data-fan-event="tour_alert_click">
           Get tour alerts <Arrow />
         </a>

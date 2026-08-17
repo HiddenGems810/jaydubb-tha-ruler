@@ -800,28 +800,18 @@ img {
   display: grid;
   grid-template-columns: 1fr 1fr;
   min-height: 52rem;
-  background: var(--ink);
-  color: var(--paper);
-  border-top: 1px solid var(--rule);
-  border-bottom: 1px solid var(--rule);
+  background: var(--panel);
 }
 
 .seven-image {
   position: relative;
   min-height: 52rem;
   overflow: hidden;
-  background: #000;
 }
 
 .seven-image img {
   object-fit: cover;
   object-position: center top;
-  filter: brightness(1.08) contrast(1.08) saturate(1.1);
-  transition: transform 800ms cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.seven-image:hover img {
-  transform: scale(1.03);
 }
 
 .seven-copy {
@@ -830,30 +820,24 @@ img {
   justify-content: center;
   align-items: flex-start;
   padding: 6vw;
-  background: var(--ink);
-  color: var(--paper);
 }
 
 .seven-copy .eyebrow {
-  margin-top: 6rem;
-  color: var(--accent);
-  letter-spacing: 0.16em;
+  margin-top: 7rem;
 }
 
 .seven-copy h2 {
   margin: 0;
   font-size: clamp(8rem, 18vw, 18rem);
   color: var(--red);
-  line-height: 0.84;
 }
 
 .seven-copy > p:not(.eyebrow) {
-  max-width: 32rem;
-  margin: 1.5rem 0 2.5rem;
+  max-width: 30rem;
+  margin: 1.5rem 0 2rem;
   font-size: 1.15rem;
   line-height: 1.65;
   letter-spacing: -0.015em;
-  color: #e5e7eb;
 }
 
 .contact-section {
@@ -869,17 +853,10 @@ img {
   position: relative;
   min-height: 52rem;
   overflow: hidden;
-  background: #000;
 }
 
 .contact-image img {
   object-fit: cover;
-  filter: brightness(1.05) contrast(1.15);
-  transition: transform 800ms cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.contact-image:hover img {
-  transform: scale(1.03);
 }
 
 .contact-copy {
@@ -887,12 +864,6 @@ img {
   flex-direction: column;
   justify-content: center;
   padding: 6vw;
-  background: #08090c;
-  color: var(--paper);
-}
-
-.contact-copy .eyebrow {
-  color: var(--accent);
   letter-spacing: 0.16em;
 }
 
@@ -1338,8 +1309,8 @@ footer {
 
 @keyframes reveal-up {
   from {
-    opacity: 0.8;
-    transform: translateY(1.5rem);
+    opacity: 0;
+    transform: translateY(4rem);
   }
   to {
     opacity: 1;
@@ -1358,10 +1329,12 @@ footer {
 
 @keyframes image-reveal {
   from {
-    opacity: 0.85;
-    transform: scale(1.04);
+    clip-path: inset(14% 14% 14% 14%);
+    opacity: 0.35;
+    transform: scale(0.94);
   }
   to {
+    clip-path: inset(0);
     opacity: 1;
     transform: scale(1);
   }
@@ -1369,64 +1342,131 @@ footer {
 
 @keyframes image-drift {
   from {
-    transform: scale(1.05) translateY(1.5%);
+    transform: scale(1.1) translateY(2.5%);
   }
   to {
-    transform: scale(1) translateY(-1.5%);
+    transform: scale(1) translateY(-2.5%);
   }
 }
 
 @keyframes logo-drift {
   from {
-    transform: translate3d(6vw, -2rem, 0) rotate(-6deg);
+    transform: translate3d(8vw, -3rem, 0) rotate(-8deg);
   }
   to {
-    transform: translate3d(-3vw, 2rem, 0) rotate(-2deg);
+    transform: translate3d(-4vw, 3rem, 0) rotate(-3deg);
   }
 }
 
+/* Universal Scroll Animation System (Rock-solid Cross-Browser) */
+.section-marker,
+.section-heading > div,
+.manifesto h2,
+.manifesto-copy,
+.story-grid h2,
+.story-copy,
+.story-section blockquote,
+.seven-copy > *,
+.contact-copy > *,
+.vip-grid > div,
+.vip-form,
+.footer-logo,
+.footer-grid,
+.footer-bottom-bar,
+.shows-empty-state {
+  opacity: 0;
+  transform: translateY(3rem);
+  transition: opacity 700ms cubic-bezier(0.16, 1, 0.3, 1), transform 700ms cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+
+.section-heading,
+.platform-row,
+.video-notes {
+  clip-path: inset(0 100% 0 0);
+  transition: clip-path 800ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.manifesto-photo,
+.video-frame,
+.live-image,
+.seven-image,
+.contact-image {
+  opacity: 0.35;
+  clip-path: inset(10% 10% 10% 10%);
+  transform: scale(0.95);
+  transition: opacity 800ms cubic-bezier(0.16, 1, 0.3, 1), clip-path 800ms cubic-bezier(0.16, 1, 0.3, 1), transform 800ms cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, clip-path, transform;
+}
+
+.release-list li,
+.press-list li,
+.shows-list .show-card {
+  opacity: 0;
+  transform: translateY(2.5rem);
+  transition: opacity 600ms cubic-bezier(0.16, 1, 0.3, 1), transform 600ms cubic-bezier(0.16, 1, 0.3, 1), border-color 200ms ease;
+  will-change: opacity, transform;
+}
+
+/* Stagger delays on lists */
+.release-list li:nth-child(1), .press-list li:nth-child(1), .shows-list .show-card:nth-child(1) { transition-delay: 40ms; }
+.release-list li:nth-child(2), .press-list li:nth-child(2), .shows-list .show-card:nth-child(2) { transition-delay: 90ms; }
+.release-list li:nth-child(3), .press-list li:nth-child(3), .shows-list .show-card:nth-child(3) { transition-delay: 140ms; }
+.release-list li:nth-child(4), .press-list li:nth-child(4), .shows-list .show-card:nth-child(4) { transition-delay: 190ms; }
+.release-list li:nth-child(5), .press-list li:nth-child(5), .shows-list .show-card:nth-child(5) { transition-delay: 240ms; }
+.release-list li:nth-child(6), .press-list li:nth-child(6), .shows-list .show-card:nth-child(6) { transition-delay: 290ms; }
+
+/* In-View Active State (Full Opacity & Crystal Sharpness) */
+.section-marker.in-view,
+.section-heading > div.in-view,
+.manifesto h2.in-view,
+.manifesto-copy.in-view,
+.story-grid h2.in-view,
+.story-copy.in-view,
+.story-section blockquote.in-view,
+.seven-copy.in-view > *,
+.seven-copy > *.in-view,
+.contact-copy.in-view > *,
+.contact-copy > *.in-view,
+.vip-grid > div.in-view,
+.vip-form.in-view,
+.vip-container.in-view .vip-grid > div,
+.vip-container.in-view .vip-form,
+.vip-container.in-view .section-marker,
+.footer-logo.in-view,
+.footer-grid.in-view,
+.footer-bottom-bar.in-view,
+.shows-empty-state.in-view,
+.release-list li.in-view,
+.press-list li.in-view,
+.shows-list .show-card.in-view {
+  opacity: 1 !important;
+  transform: translateY(0) !important;
+}
+
+.section-heading.in-view,
+.platform-row.in-view,
+.video-notes.in-view {
+  clip-path: inset(0) !important;
+}
+
+.manifesto-photo.in-view,
+.video-frame.in-view,
+.live-image.in-view,
+.seven-image.in-view,
+.contact-image.in-view {
+  opacity: 1 !important;
+  clip-path: inset(0) !important;
+  transform: scale(1) !important;
+}
+
 @supports (animation-timeline: view()) {
-  .section-marker,
-  .section-heading > div,
-  .manifesto h2,
-  .manifesto-copy,
-  .story-grid h2,
-  .story-copy,
-  .story-section blockquote,
-  .footer-logo,
-  .footer-grid {
-    animation: reveal-up linear both;
-    animation-timeline: view();
-    animation-range: entry 0% cover 25%;
-  }
-
-  .section-heading,
-  .platform-row,
-  .video-notes {
-    animation: reveal-line linear both;
-    animation-timeline: view();
-    animation-range: entry 5% cover 30%;
-  }
-
-  .manifesto-photo,
-  .video-frame,
-  .live-image {
-    animation: image-reveal linear both;
-    animation-timeline: view();
-    animation-range: entry 5% cover 35%;
-  }
-
-  .manifesto-photo img {
+  .manifesto-photo img,
+  .seven-image img,
+  .contact-image img {
     animation: image-drift linear both;
     animation-timeline: view();
     animation-range: entry 0% exit 100%;
-  }
-
-  .release-list li,
-  .press-list li {
-    animation: reveal-up linear both;
-    animation-timeline: view();
-    animation-range: entry 0% cover 20%;
   }
 
   .story-logo {
@@ -2055,15 +2095,19 @@ footer {
 }
 
 .button-sold-out {
-  display: inline-block;
-  padding: 0.85rem 1.5rem;
-  background: #25262c;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 3.2rem;
+  padding: 0.85rem 1.25rem;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: #1c1d24;
   color: #8c8c87;
   font-family: var(--font-mono), monospace;
-  font-size: 0.8rem;
-  text-transform: uppercase;
-  font-weight: 600;
+  font-size: 0.72rem;
+  font-weight: 500;
   letter-spacing: 0.08em;
+  text-transform: uppercase;
 }
 
 .shows-empty-state {
@@ -2159,8 +2203,8 @@ footer {
 .form-group select,
 .form-group textarea {
   padding: 0.95rem 1.15rem;
-  background: #111217;
-  border: 1px solid #282932;
+  background: #161822;
+  border: 1px solid #2e303d;
   color: #ffffff;
   font-family: var(--font-mono), monospace;
   font-size: 0.86rem;
@@ -2171,15 +2215,15 @@ footer {
 
 .form-group input::placeholder,
 .form-group textarea::placeholder {
-  color: #52535d;
+  color: #7b7e8d;
 }
 
 .form-group input:focus,
 .form-group select:focus,
 .form-group textarea:focus {
-  border-color: var(--accent);
-  background: #161720;
-  box-shadow: 0 0 0 1px var(--accent);
+  border-color: var(--red);
+  background: #1c1e2b;
+  box-shadow: 0 0 0 1px var(--red);
 }
 
 .form-error {
