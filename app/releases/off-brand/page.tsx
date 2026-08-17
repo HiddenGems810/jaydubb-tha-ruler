@@ -255,25 +255,26 @@ export default function OffBrandPage() {
           />
         </div>
         <div className="footer-grid">
-          <p>Colorado Springs, CO</p>
-          <nav aria-label="Social links">
+          <p className="footer-origin">Colorado Springs, CO</p>
+          <nav aria-label="Social links" className="footer-nav">
             <a href="https://open.spotify.com/artist/7IlXxo9gPXLZz2oWpTwS4l" target="_blank" rel="noreferrer">Spotify</a>
             <a href="https://music.apple.com/us/artist/jaydubbtharuler/1439373897" target="_blank" rel="noreferrer">Apple Music</a>
             <a href="https://www.youtube.com/@jaydubbtharuler" target="_blank" rel="noreferrer">YouTube</a>
             <a href="https://www.instagram.com/jaydubbtharuler/" target="_blank" rel="noreferrer">Instagram</a>
             <a href="https://x.com/JayDubbThaRuler" target="_blank" rel="noreferrer">X</a>
           </nav>
-          <p>© {new Date().getFullYear()} JayDubb Tha Ruler</p>
+          <p className="footer-brand-tag">The 7 · Independent</p>
         </div>
-        <div className="footer-credits">
-          <p>
+        <div className="footer-bottom-bar">
+          <p>© {new Date().getFullYear()} JayDubb Tha Ruler</p>
+          <p className="footer-designer">
             Website Designed &amp; Developed by{" "}
             <a
               href="https://gerquiaabner.com"
               target="_blank"
               rel="noreferrer"
             >
-              Ger&apos;Quia Abner
+              Ger&apos;Quia Abner <Arrow />
             </a>
           </p>
         </div>

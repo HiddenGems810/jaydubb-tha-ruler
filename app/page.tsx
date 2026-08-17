@@ -749,8 +749,8 @@ export default function Home() {
           />
         </div>
         <div className="footer-grid">
-          <p>Colorado Springs, CO</p>
-          <nav aria-label="Social links">
+          <p className="footer-origin">Colorado Springs, CO</p>
+          <nav aria-label="Social links" className="footer-nav">
             {socials.map(([label, href]) => (
               <a
                 key={label}
@@ -764,17 +764,18 @@ export default function Home() {
               </a>
             ))}
           </nav>
-          <p>© {new Date().getFullYear()} JayDubb Tha Ruler</p>
+          <p className="footer-brand-tag">The 7 · Independent</p>
         </div>
-        <div className="footer-credits">
-          <p>
+        <div className="footer-bottom-bar">
+          <p>© {new Date().getFullYear()} JayDubb Tha Ruler</p>
+          <p className="footer-designer">
             Website Designed &amp; Developed by{" "}
             <a
               href="https://gerquiaabner.com"
               target="_blank"
               rel="noreferrer"
             >
-              Ger&apos;Quia Abner
+              Ger&apos;Quia Abner <Arrow />
             </a>
           </p>
         </div>
