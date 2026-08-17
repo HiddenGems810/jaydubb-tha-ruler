@@ -357,19 +357,31 @@ img {
 .button-primary {
   border-color: var(--red);
   background: var(--red);
-  color: var(--paper);
+  color: #ffffff;
+  box-shadow: 0 4px 20px rgba(193, 18, 31, 0.35);
+  transition: background 200ms ease, color 200ms ease, border-color 200ms ease, transform 200ms var(--ease-out-expo), box-shadow 300ms ease;
 }
 
 .button-ghost {
-  background: rgba(8, 9, 11, 0.35);
-  color: var(--paper);
+  border-color: rgba(255, 255, 255, 0.25);
+  background: rgba(8, 9, 11, 0.6);
+  color: #ffffff;
+  transition: background 200ms ease, color 200ms ease, border-color 200ms ease, transform 200ms var(--ease-out-expo);
 }
 
-.button:hover,
-.button:focus-visible {
-  border-color: var(--paper);
-  background: var(--paper);
-  color: var(--ink);
+.button-primary:hover,
+.button-primary:focus-visible {
+  border-color: #ffffff;
+  background: #ffffff;
+  color: #08090b;
+  box-shadow: 0 6px 30px rgba(255, 255, 255, 0.4);
+}
+
+.button-ghost:hover,
+.button-ghost:focus-visible {
+  border-color: #ffffff;
+  background: #ffffff;
+  color: #08090b;
 }
 
 .hero-index {
@@ -1412,62 +1424,55 @@ footer {
   }
 }
 
-@supports (animation-timeline: view()) {
-  .section-marker,
-  .section-heading > div,
-  .manifesto h2,
-  .manifesto-copy,
-  .story-grid h2,
-  .story-copy,
-  .story-section blockquote,
-  .seven-copy > *,
-  .contact-copy > *,
-  .footer-logo,
-  .footer-grid {
-    animation: reveal-up linear both;
-    animation-timeline: view();
-    animation-range: entry 5% cover 32%;
+/* ==========================================================================
+   AWWWARDS SCROLL ENTRANCE REVEAL SYSTEM (/top-design)
+   ========================================================================== */
+
+@media (prefers-reduced-motion: no-preference) {
+  [data-reveal="section"] {
+    opacity: 0;
+    transform: translateY(32px);
+    transition: opacity 0.85s var(--ease-out-expo), transform 0.85s var(--ease-out-expo);
+    will-change: opacity, transform;
   }
 
-  .section-heading,
-  .platform-row,
-  .video-notes {
-    animation: reveal-line linear both;
-    animation-timeline: view();
-    animation-range: entry 8% cover 36%;
+  [data-reveal="section"].is-inview {
+    opacity: 1 !important;
+    transform: translateY(0) !important;
   }
 
-  .manifesto-photo,
-  .video-frame,
-  .live-image,
-  .seven-image,
-  .contact-image {
-    animation: image-reveal linear both;
-    animation-timeline: view();
-    animation-range: entry 8% cover 42%;
+  [data-reveal="image"] {
+    opacity: 0;
+    clip-path: inset(6% 6% 6% 6%);
+    transform: scale(0.96);
+    transition: opacity 0.9s var(--ease-out-expo), clip-path 0.9s var(--ease-out-expo), transform 0.9s var(--ease-out-expo);
+    will-change: opacity, clip-path, transform;
   }
 
-  .manifesto-photo img,
-  .seven-image img,
-  .contact-image img {
-    animation: image-drift linear both;
-    animation-timeline: view();
-    animation-range: entry 0% exit 100%;
+  [data-reveal="image"].is-inview {
+    opacity: 1 !important;
+    clip-path: inset(0) !important;
+    transform: scale(1) !important;
   }
 
-  .release-list li,
-  .press-list li,
-  .shows-list .show-card {
-    animation: reveal-up linear both;
-    animation-timeline: view();
-    animation-range: entry 0% cover 28%;
+  [data-reveal="stagger"] > * {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.65s var(--ease-out-expo), transform 0.65s var(--ease-out-expo);
   }
 
-  .story-logo {
-    animation: logo-drift linear both;
-    animation-timeline: view();
-    animation-range: entry 0% exit 100%;
+  [data-reveal="stagger"].is-inview > * {
+    opacity: 1 !important;
+    transform: translateY(0) !important;
   }
+
+  [data-reveal="stagger"].is-inview > *:nth-child(1) { transition-delay: 0.04s; }
+  [data-reveal="stagger"].is-inview > *:nth-child(2) { transition-delay: 0.08s; }
+  [data-reveal="stagger"].is-inview > *:nth-child(3) { transition-delay: 0.12s; }
+  [data-reveal="stagger"].is-inview > *:nth-child(4) { transition-delay: 0.16s; }
+  [data-reveal="stagger"].is-inview > *:nth-child(5) { transition-delay: 0.2s; }
+  [data-reveal="stagger"].is-inview > *:nth-child(6) { transition-delay: 0.24s; }
+  [data-reveal="stagger"].is-inview > *:nth-child(7) { transition-delay: 0.28s; }
 }
 
 @media (max-width: 980px) {
