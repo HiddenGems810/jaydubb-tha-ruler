@@ -4,6 +4,7 @@ import { getAllPublishedShows } from "@/lib/supabase/queries";
 import { ShowsSection } from "@/components/shows-section";
 import { VipForm } from "@/components/vip-form";
 import { BookingForm } from "@/components/booking-form";
+import { ScrollExperience } from "@/components/scroll-experience";
 
 const releases = [
   {
@@ -210,6 +211,7 @@ export default async function Home() {
   const shows = await getAllPublishedShows();
   return (
     <>
+      <ScrollExperience />
       <a className="skip-link" href="#main">
         Skip to content
       </a>

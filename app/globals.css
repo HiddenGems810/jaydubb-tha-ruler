@@ -37,14 +37,25 @@
   --font-body: "Manrope";
   --font-mono: "IBM Plex Mono";
   --ink: #08090b;
-  --panel: #121316;
+  --panel: #0f1115;
   --panel-soft: #18191d;
   --paper: #f5f5f2;
   --muted: #bdbdb8;
   --rule: #2b2b2b;
-  --red: #c1121f;
-  --red-dark: #8f0d18;
+  --red: #e63946;
+  --red-dark: #c1121f;
   --blue: #155bb8;
+
+  /* Awwwards-grade custom easing functions (/top-design) */
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-out-quart: cubic-bezier(0.25, 1, 0.5, 1);
+  --ease-out-back: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --ease-in-out-expo: cubic-bezier(0.87, 0, 0.13, 1);
+}
+
+::selection {
+  background: var(--red);
+  color: #ffffff;
 }
 
 *,
@@ -802,18 +813,26 @@ img {
   display: grid;
   grid-template-columns: 1fr 1fr;
   min-height: 52rem;
-  background: var(--panel);
+  background: #0d0e12;
+  border-top: 1px solid var(--rule);
+  border-bottom: 1px solid var(--rule);
 }
 
 .seven-image {
   position: relative;
   min-height: 52rem;
   overflow: hidden;
+  background: #000000;
 }
 
 .seven-image img {
   object-fit: cover;
   object-position: center top;
+  transition: transform 1.2s var(--ease-out-expo), filter 0.8s ease;
+}
+
+.seven-section:hover .seven-image img {
+  transform: scale(1.03);
 }
 
 .seven-copy {
@@ -821,75 +840,119 @@ img {
   flex-direction: column;
   justify-content: center;
   align-items: flex-start;
-  padding: 6vw;
+  padding: clamp(3rem, 6vw, 6rem);
+}
+
+.seven-copy .section-marker {
+  margin-bottom: 1.5rem;
 }
 
 .seven-copy .eyebrow {
-  margin-top: 7rem;
+  margin: 0 0 0.5rem;
+  font-family: var(--font-mono), monospace;
+  font-size: 0.8rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--red);
 }
 
 .seven-copy h2 {
   margin: 0;
-  font-size: clamp(8rem, 18vw, 18rem);
-  color: var(--red);
+  font-family: var(--font-display), Impact, sans-serif;
+  font-size: clamp(7rem, 16vw, 16rem);
+  line-height: 0.85;
+  color: #e63946;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
 }
 
 .seven-copy > p:not(.eyebrow) {
-  max-width: 30rem;
-  margin: 1.5rem 0 2rem;
+  max-width: 32rem;
+  margin: 1.75rem 0 2.5rem;
   font-size: 1.15rem;
   line-height: 1.65;
   letter-spacing: -0.015em;
+  color: #f5f5f2;
 }
 
 .contact-section {
   display: grid;
-  grid-template-columns: 0.8fr 1.2fr;
-  min-height: 52rem;
-  background: var(--paper);
-  color: var(--ink);
+  grid-template-columns: 0.85fr 1.15fr;
+  min-height: 54rem;
+  background: #08090b;
+  color: #f5f5f2;
+  border-top: 1px solid var(--rule);
 }
 
 .contact-image {
   position: relative;
-  min-height: 52rem;
+  min-height: 54rem;
   overflow: hidden;
+  background: #000000;
 }
 
 .contact-image img {
   object-fit: cover;
+  object-position: center top;
+  transition: transform 1.2s var(--ease-out-expo);
+}
+
+.contact-section:hover .contact-image img {
+  transform: scale(1.03);
 }
 
 .contact-copy {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding: 6vw;
+  padding: clamp(3rem, 6vw, 5.5rem);
+}
+
+.contact-copy .section-marker {
+  margin-bottom: 1.5rem;
+}
+
+.contact-copy .eyebrow {
+  font-family: var(--font-mono), monospace;
+  font-size: 0.78rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--red);
+  margin: 0 0 0.5rem;
 }
 
 .contact-copy h2 {
   margin: 0;
-  font-size: clamp(5rem, 10vw, 10rem);
+  font-family: var(--font-display), Impact, sans-serif;
+  font-size: clamp(4rem, 8vw, 8rem);
+  line-height: 0.92;
+  text-transform: uppercase;
+  letter-spacing: -0.02em;
+  color: #ffffff;
 }
 
 .contact-email {
   display: inline-flex;
   justify-content: space-between;
+  align-items: center;
   gap: 1rem;
-  margin-top: 4rem;
+  margin-top: 2.5rem;
   padding: 1.2rem 0;
-  border-top: 1px solid var(--ink);
-  border-bottom: 1px solid var(--ink);
+  border-top: 1px solid rgba(255, 255, 255, 0.15);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.15);
   font-family: var(--font-mono), monospace;
-  font-size: clamp(0.72rem, 1.2vw, 1rem);
-  font-weight: 500;
-  letter-spacing: 0.04em;
+  font-size: clamp(0.78rem, 1.2vw, 1.05rem);
+  font-weight: 600;
+  letter-spacing: 0.06em;
   text-transform: uppercase;
+  color: #ffffff;
+  transition: color 200ms ease, border-color 200ms ease;
 }
 
 .contact-email:hover,
 .contact-email:focus-visible {
   color: var(--red);
+  border-color: var(--red);
 }
 
 /* VIP Fan Acquisition Section */
@@ -2137,8 +2200,8 @@ footer {
 
 .form-group label {
   font-family: var(--font-mono), monospace;
-  font-size: 0.74rem;
-  color: #9ca3af;
+  font-size: 0.76rem;
+  color: #f5f5f2;
   text-transform: uppercase;
   letter-spacing: 0.08em;
   font-weight: 600;
@@ -2147,28 +2210,28 @@ footer {
 .form-group input,
 .form-group select,
 .form-group textarea {
-  padding: 0.95rem 1.15rem;
-  background: #161822;
-  border: 1px solid #2e303d;
+  padding: 1rem 1.25rem;
+  background: #11131a;
+  border: 1px solid rgba(255, 255, 255, 0.16);
   color: #ffffff;
   font-family: var(--font-mono), monospace;
-  font-size: 0.86rem;
+  font-size: 0.88rem;
   outline: none;
   border-radius: 0;
-  transition: border-color 200ms ease, box-shadow 200ms ease, background 200ms ease;
+  transition: border-color 200ms var(--ease-out-expo), box-shadow 200ms ease, background 200ms ease;
 }
 
 .form-group input::placeholder,
 .form-group textarea::placeholder {
-  color: #7b7e8d;
+  color: #8e92a4;
 }
 
 .form-group input:focus,
 .form-group select:focus,
 .form-group textarea:focus {
-  border-color: var(--red);
-  background: #1c1e2b;
-  box-shadow: 0 0 0 1px var(--red);
+  border-color: #e63946;
+  background: #161824;
+  box-shadow: 0 0 0 2px rgba(230, 57, 70, 0.35);
 }
 
 .form-error {
