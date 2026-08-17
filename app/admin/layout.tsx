@@ -5,6 +5,8 @@ import AdminLoginPage from "./login/page";
 import { LogoutButton } from "@/components/admin/logout-button";
 import "./admin.css";
 
+export const dynamic = "force-dynamic";
+
 export const metadata: Metadata = {
   title: "Admin Hub · JayDubb Tha Ruler",
   robots: {
