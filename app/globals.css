@@ -843,9 +843,8 @@ img {
 .seven-copy h2 {
   margin: 0;
   font-size: clamp(8rem, 18vw, 18rem);
-  color: var(--accent);
-  line-height: 0.82;
-  text-shadow: 0 0 50px rgba(193, 18, 31, 0.35);
+  color: var(--red);
+  line-height: 0.84;
 }
 
 .seven-copy > p:not(.eyebrow) {

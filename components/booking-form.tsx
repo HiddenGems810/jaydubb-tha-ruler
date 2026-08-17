@@ -2,6 +2,10 @@
 
 import { useState } from "react";
 
+function Arrow() {
+  return <span aria-hidden="true">↗</span>;
+}
+
 export function BookingForm() {
   const [formData, setFormData] = useState({
     name: "",
@@ -66,11 +70,11 @@ export function BookingForm() {
         </p>
         <button
           type="button"
-          className="button-ghost"
+          className="button button-ghost"
           onClick={() => setStatus("idle")}
           style={{ marginTop: "1rem" }}
         >
-          SEND ANOTHER MESSAGE
+          SEND ANOTHER MESSAGE <Arrow />
         </button>
       </div>
     );
@@ -182,14 +186,16 @@ export function BookingForm() {
         </p>
       )}
 
-      <button
-        type="submit"
-        className="button-primary"
-        disabled={status === "loading"}
-        data-fan-event="booking_inquiry_submit"
-      >
-        {status === "loading" ? "SUBMITTING..." : "SUBMIT INQUIRY ↗"}
-      </button>
+      <div>
+        <button
+          type="submit"
+          className="button button-primary"
+          disabled={status === "loading"}
+          data-fan-event="booking_inquiry_submit"
+        >
+          {status === "loading" ? "SUBMITTING..." : "SUBMIT INQUIRY"} <Arrow />
+        </button>
+      </div>
     </form>
   );
 }

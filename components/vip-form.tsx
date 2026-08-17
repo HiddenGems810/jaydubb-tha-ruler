@@ -2,6 +2,10 @@
 
 import { useState } from "react";
 
+function Arrow() {
+  return <span aria-hidden="true">↗</span>;
+}
+
 export function VipForm() {
   const [email, setEmail] = useState("");
   const [firstName, setFirstName] = useState("");
@@ -81,12 +85,12 @@ export function VipForm() {
             />
             <button
               type="submit"
-              className="button-primary"
+              className="button button-primary"
               disabled={status === "loading"}
               data-fan-event="vip_signup"
               data-platform="vip_club"
             >
-              {status === "loading" ? "JOINING..." : "JOIN THE 7"}
+              {status === "loading" ? "JOINING..." : "JOIN THE 7"} <Arrow />
             </button>
           </div>
           {status === "error" && (

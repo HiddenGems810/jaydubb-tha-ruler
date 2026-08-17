@@ -5,11 +5,7 @@ interface ShowsSectionProps {
 }
 
 function Arrow() {
-  return (
-    <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true">
-      <path d="M2 10L10 2M10 2H4M10 2V8" stroke="currentColor" strokeWidth="1.5" />
-    </svg>
-  );
+  return <span aria-hidden="true">↗</span>;
 }
 
 function formatShowDate(dateStr: string, timezone?: string) {
@@ -122,7 +118,7 @@ export function ShowsSection({ shows }: ShowsSectionProps) {
                       href={show.ticket_url}
                       target="_blank"
                       rel="noreferrer"
-                      className="button-primary"
+                      className="button button-primary"
                       data-fan-event="ticket_click"
                       data-platform={show.venue_name}
                     >
@@ -131,7 +127,7 @@ export function ShowsSection({ shows }: ShowsSectionProps) {
                   ) : (
                     <a
                       href="#vip"
-                      className="button-ghost"
+                      className="button button-ghost"
                       data-fan-event="ticket_notify"
                     >
                       NOTIFY ME <Arrow />
@@ -151,7 +147,7 @@ export function ShowsSection({ shows }: ShowsSectionProps) {
               New tour dates, festival appearances, and Colorado showcases for 2026 are currently in preparation.
               Join The 7 VIP Fan Club to receive instant pre-sale access and city announcements.
             </p>
-            <a href="#vip" className="button-primary" data-fan-event="empty_shows_vip_click">
+            <a href="#vip" className="button button-primary" data-fan-event="empty_shows_vip_click">
               JOIN VIP TOUR LIST <Arrow />
             </a>
           </div>
