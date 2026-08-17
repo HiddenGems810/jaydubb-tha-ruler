@@ -73,9 +73,13 @@ export const metadata: Metadata = {
     images: ["https://jaydubbtharuler.com/og.png"],
   },
   icons: {
-    icon: "/images/jay-dubb/profile-moody.jpg",
-    shortcut: "/images/jay-dubb/profile-moody.jpg",
-    apple: "/images/brand/main-white-logo.png",
+    icon: [
+      { url: "/favicon.ico" },
+      { url: "/favicon.png", type: "image/png" },
+      { url: "/icon.png", type: "image/png" },
+    ],
+    shortcut: "/favicon.png",
+    apple: "/apple-icon.png",
   },
   manifest: "/site.webmanifest",
 };
