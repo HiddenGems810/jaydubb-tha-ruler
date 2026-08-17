@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+
+# Sitemaps
+Sitemap: https://jaydubbtharuler.com/sitemap.xml
+
+# LLM / AI Discovery Context
+# See https://jaydubbtharuler.com/llms.txt for authoritative artist facts

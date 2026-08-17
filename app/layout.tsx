@@ -1,53 +1,84 @@
-import type { Metadata } from "next";
-import { headers } from "next/headers";
+import type { Metadata, Viewport } from "next";
 import "./globals.css";
 
-export async function generateMetadata(): Promise<Metadata> {
-  const requestHeaders = await headers();
-  const host =
-    requestHeaders.get("x-forwarded-host") ??
-    requestHeaders.get("host") ??
-    "jaydubbtharuler.com";
-  const isLocalHost =
-    /^(localhost|127(?:\.\d+){3}|\[::1\])(?::\d+)?$/i.test(host);
-  const protocol = isLocalHost
-    ? "http"
-    : (requestHeaders.get("x-forwarded-proto") ?? "https");
-  const base = new URL(`${protocol}://${host}`);
-  const socialImage = new URL("/og.png", base).toString();
+export const viewport: Viewport = {
+  themeColor: "#000000",
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 5,
+};
 
-  return {
-    metadataBase: base,
-    title: "JayDubb Tha Ruler | Official Website, Music, Videos, Shows & Merch",
+export const metadata: Metadata = {
+  metadataBase: new URL("https://jaydubbtharuler.com"),
+  title: {
+    default: "JayDubb Tha Ruler | Official Artist Website · Music, Videos & Shows",
+    template: "%s | JayDubb Tha Ruler",
+  },
+  description:
+    "Official website for JayDubb Tha Ruler, Colorado Springs independent hip-hop artist. Stream new music, watch Aquarium Floors, view live tour dates, shop The 7, and book appearances.",
+  keywords: [
+    "JayDubb Tha Ruler",
+    "JayDubb",
+    "JayDubbThaRuler",
+    "Justin Wallace",
+    "Aquarium Floors",
+    "Shake It Bae",
+    "Off Brand Westside Boogie",
+    "Don't Forget the Bag",
+    "Colorado Springs rap",
+    "Colorado hip-hop artist",
+    "The 7 merch",
+    "independent hip-hop",
+  ],
+  authors: [{ name: "JayDubb Tha Ruler", url: "https://jaydubbtharuler.com" }],
+  creator: "JayDubb Tha Ruler",
+  publisher: "The 7 / KSTG ENT",
+  alternates: {
+    canonical: "https://jaydubbtharuler.com",
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
+  },
+  openGraph: {
+    type: "profile",
+    title: "JayDubb Tha Ruler | Official Artist Hub",
     description:
-      "Official website for JayDubb Tha Ruler. Stream new music, watch official videos, find live updates, shop The 7 merch, and book appearances.",
-    openGraph: {
-      type: "website",
-      title: "JayDubb Tha Ruler | Official Site",
-      description: "New music, official videos, live updates, merch, and booking.",
-      url: base,
-      siteName: "JayDubb Tha Ruler",
-      images: [
-        {
-          url: socialImage,
-          width: 1732,
-          height: 909,
-          alt: "JayDubb Tha Ruler — Colorado-rooted, catalog-built",
-        },
-      ],
-    },
-    twitter: {
-      card: "summary_large_image",
-      title: "JayDubb Tha Ruler | Official Site",
-      description: "New music, official videos, live updates, merch, and booking.",
-      images: [socialImage],
-    },
-    icons: {
-      icon: "/images/jay-dubb/profile-moody.jpg",
-      shortcut: "/images/jay-dubb/profile-moody.jpg",
-    },
-  };
-}
+      "Colorado-rooted. Catalog-built. Never off brand. Official music, videos, live performance dates, and booking.",
+    url: "https://jaydubbtharuler.com",
+    siteName: "JayDubb Tha Ruler",
+    locale: "en_US",
+    images: [
+      {
+        url: "https://jaydubbtharuler.com/og.png",
+        width: 1732,
+        height: 909,
+        alt: "JayDubb Tha Ruler — Official Artist Website",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "JayDubb Tha Ruler | Official Site",
+    description: "New music, official videos, live updates, merch, and booking.",
+    creator: "@JayDubbThaRuler",
+    site: "@JayDubbThaRuler",
+    images: ["https://jaydubbtharuler.com/og.png"],
+  },
+  icons: {
+    icon: "/images/jay-dubb/profile-moody.jpg",
+    shortcut: "/images/jay-dubb/profile-moody.jpg",
+    apple: "/images/brand/main-white-logo.png",
+  },
+  manifest: "/site.webmanifest",
+};
 
 export default function RootLayout({
   children,
@@ -56,7 +87,40 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <head>
+        <link rel="preconnect" href="https://www.youtube.com" />
+        <link rel="preconnect" href="https://open.spotify.com" />
+        <link rel="preconnect" href="https://music.apple.com" />
+      </head>
+      <body>
+        {children}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              (function() {
+                document.addEventListener('click', function(e) {
+                  var target = e.target.closest('[data-fan-event]');
+                  if (!target) return;
+                  var eventName = target.getAttribute('data-fan-event');
+                  var platform = target.getAttribute('data-platform') || '';
+                  var details = {
+                    event: eventName,
+                    platform: platform,
+                    href: target.getAttribute('href') || '',
+                    timestamp: new Date().toISOString()
+                  };
+                  if (window.dataLayer) {
+                    window.dataLayer.push(details);
+                  }
+                  if (typeof window.gtag === 'function') {
+                    window.gtag('event', eventName, { platform: platform });
+                  }
+                }, true);
+              })();
+            `,
+          }}
+        />
+      </body>
     </html>
   );
 }
