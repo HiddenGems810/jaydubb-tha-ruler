@@ -1,5 +1,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { createClient } from "@/lib/supabase/server";
+import AdminLoginPage from "./login/page";
+import { LogoutButton } from "@/components/admin/logout-button";
 import "./admin.css";
 
 export const metadata: Metadata = {
@@ -11,7 +14,38 @@ export const metadata: Metadata = {
   },
 };
 
-export default function AdminLayout({ children }: { children: React.ReactNode }) {
+export default async function AdminLayout({ children }: { children: React.ReactNode }) {
+  let isAuthenticated = false;
+  let isAdmin = false;
+  let adminEmail = "";
+
+  try {
+    const supabase = await createClient();
+    const { data: { user } } = await supabase.auth.getUser();
+
+    if (user) {
+      isAuthenticated = true;
+      adminEmail = user.email || "";
+
+      const { data: adminRecord } = await supabase
+        .from("admin_users")
+        .select("id, role, email")
+        .eq("id", user.id)
+        .maybeSingle();
+
+      if (adminRecord) {
+        isAdmin = true;
+      }
+    }
+  } catch (err) {
+    console.error("Admin layout auth check error:", err);
+  }
+
+  // Enforce auth: Unauthenticated or non-admin users are blocked and shown login screen
+  if (!isAuthenticated || !isAdmin) {
+    return <AdminLoginPage />;
+  }
+
   return (
     <div className="admin-root">
       <aside className="admin-sidebar">
@@ -99,8 +133,9 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
           <Link href="/" target="_blank" className="btn btn-secondary btn-sm" style={{ width: "100%" }}>
             View Public Site ↗
           </Link>
-          <div className="admin-user-info">
-            SECURE · POSTGRES RLS
+          <LogoutButton />
+          <div className="admin-user-info" style={{ marginTop: "0.5rem" }}>
+            {adminEmail ? `ADMIN: ${adminEmail}` : "SECURE · POSTGRES RLS"}
           </div>
         </div>
       </aside>
