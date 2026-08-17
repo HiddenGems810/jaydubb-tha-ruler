@@ -42,7 +42,7 @@
   --paper: #f5f5f2;
   --muted: #bdbdb8;
   --rule: #2b2b2b;
-  --red: #e63946;
+  --red: #C1121F;
   --red-dark: #c1121f;
   --blue: #155bb8;
 
@@ -74,13 +74,41 @@ html {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
+
+  /* Single brand-red scrollbar for main document window */
+  scrollbar-color: var(--red) var(--ink);
+  scrollbar-width: thin;
+}
+
+/* WebKit scrollbar - scoped strictly to html so no sub-elements ever spawn a 2nd scrollbar */
+html::-webkit-scrollbar {
+  width: 10px;
+}
+
+html::-webkit-scrollbar-track {
+  background: var(--ink);
+}
+
+html::-webkit-scrollbar-thumb {
+  background: var(--red);
+  border-radius: 0;
+}
+
+html::-webkit-scrollbar-thumb:hover {
+  background: #d4151f;
+}
+
+/* Guarantee NO inner or secondary scrollbars ever render */
+*:not(html)::-webkit-scrollbar {
+  display: none !important;
+  width: 0 !important;
+  height: 0 !important;
 }
 
 body {
   margin: 0;
   max-width: 100%;
   width: 100%;
-  overflow-x: hidden;
   position: relative;
   background: var(--ink);
   color: var(--paper);
@@ -92,7 +120,6 @@ body {
 main {
   max-width: 100%;
   width: 100%;
-  overflow-x: hidden;
 }
 
 h1,
@@ -224,7 +251,7 @@ img {
 
 .hero-image {
   position: absolute;
-  inset: 0 0 0 30%;
+  inset: 0 0 0 20%;
   z-index: -3;
   animation: hero-reveal 1.2s cubic-bezier(0.16, 1, 0.3, 1) 120ms both;
 }
@@ -240,17 +267,10 @@ img {
   inset: 0;
   z-index: -2;
   background:
-    linear-gradient(90deg, rgba(8, 9, 11, 1) 0%, rgba(8, 9, 11, 0.96) 25%, rgba(8, 9, 11, 0.38) 61%, rgba(8, 9, 11, 0.08) 100%),
+    linear-gradient(90deg, rgba(8, 9, 11, 1) 0%, rgba(8, 9, 11, 1) 18%, rgba(8, 9, 11, 0.92) 28%, rgba(8, 9, 11, 0.6) 42%, rgba(8, 9, 11, 0.25) 62%, rgba(8, 9, 11, 0.06) 100%),
     linear-gradient(0deg, rgba(8, 9, 11, 0.72) 0%, transparent 45%);
 }
 
-.hero::after {
-  content: "";
-  position: absolute;
-  inset: 4.75rem auto 0 28%;
-  width: 1px;
-  background: rgba(245, 245, 242, 0.18);
-}
 
 .hero-copy {
   display: flex;
@@ -732,8 +752,10 @@ img {
   right: -12vw;
   z-index: -1;
   width: min(80rem, 90vw);
-  opacity: 0.12;
-  transform: rotate(-5deg);
+  opacity: 0.15;
+  transform: rotate(-5deg) scale(1.35);
+  will-change: transform;
+  transition: transform 0.05s linear;
 }
 
 .story-logo img {
@@ -873,7 +895,7 @@ img {
   font-family: var(--font-display), Impact, sans-serif;
   font-size: clamp(7rem, 16vw, 16rem);
   line-height: 0.85;
-  color: #e63946;
+  color: var(--red);
   letter-spacing: -0.02em;
   text-transform: uppercase;
 }
@@ -1055,6 +1077,26 @@ img {
   padding-top: 4.75rem;
 }
 
+/* Fix manifesto grid on release sub-pages:
+   H2 spans full width (row 1), copy + photo sit side-by-side (row 2) */
+.release-page .manifesto-grid {
+  grid-template-columns: 1.3fr 0.7fr;
+  gap: 3vw;
+}
+
+.release-page .manifesto-grid h2 {
+  grid-column: 1 / -1;
+  margin-bottom: 1rem;
+}
+
+.release-page .manifesto-copy {
+  align-self: start;
+}
+
+.release-page .manifesto-photo {
+  min-height: 24rem;
+}
+
 .release-hero {
   padding: clamp(3rem, 7vw, 6rem) 3vw clamp(2rem, 4vw, 4rem);
   border-bottom: 1px solid var(--rule);
@@ -1129,6 +1171,11 @@ img {
 
 .more-releases {
   padding: clamp(4rem, 8vw, 7rem) 3vw;
+}
+
+/* Release sub-page section-heading has 2 children (no marker), not 3 */
+.more-releases .section-heading {
+  grid-template-columns: 1fr auto;
 }
 
 .releases-grid {
@@ -1209,7 +1256,7 @@ img {
   gap: 1.5rem;
 }
 
-/* Footer Section - STRICT #000000 solid background & 0.35 logo opacity */
+/* Footer Section - STRICT #000000 solid background & 0.15 logo opacity */
 footer {
   padding: 6rem 3vw 2.5rem;
   background: #000000;
@@ -1223,12 +1270,7 @@ footer {
 .footer-logo img {
   width: 100%;
   height: auto;
-  opacity: 0.85;
-  transition: opacity 300ms ease;
-}
-
-.footer-logo:hover img {
-  opacity: 1;
+  opacity: 0.15;
 }
 
 .footer-grid {
@@ -1489,7 +1531,7 @@ footer {
   .hero {
     width: 100%;
     max-width: 100%;
-    overflow-x: hidden;
+    overflow-x: clip;
   }
 
   .hero-image {
@@ -1498,10 +1540,6 @@ footer {
     left: 0;
     width: 100%;
     max-width: 100%;
-  }
-
-  .hero::after {
-    display: none;
   }
 
   .hero-copy {
@@ -1576,7 +1614,7 @@ footer {
     padding: 5rem 2rem 2.5rem;
     width: 100%;
     max-width: 100%;
-    overflow-x: hidden;
+    overflow-x: clip;
   }
 
   .footer-logo {
@@ -1650,7 +1688,7 @@ footer {
     padding: 7rem 1rem 2rem;
     width: 100%;
     max-width: 100%;
-    overflow-x: hidden;
+    overflow-x: clip;
   }
 
   .hero-image {
@@ -1734,7 +1772,7 @@ footer {
     padding-inline: 1rem;
     width: 100%;
     max-width: 100%;
-    overflow-x: hidden;
+    overflow-x: clip;
   }
 
   .manifesto-grid {
@@ -1749,6 +1787,15 @@ footer {
 
   .manifesto-photo {
     min-height: 31rem;
+  }
+
+  /* Release sub-page: collapse 2-col override to single column on mobile */
+  .release-page .manifesto-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .release-page .manifesto-grid h2 {
+    grid-column: 1;
   }
 
   .section-heading {
@@ -1828,7 +1875,7 @@ footer {
   .story-logo {
     top: 1rem;
     left: 50%;
-    transform: translateX(-50%) rotate(-5deg);
+    transform: translateX(-50%) rotate(-5deg) scale(1.35);
     width: min(35rem, 90vw);
     right: auto;
     max-width: 90vw;
@@ -1924,7 +1971,7 @@ footer {
     padding: 4.5rem 1rem 2.5rem;
     width: 100%;
     max-width: 100%;
-    overflow-x: hidden;
+    overflow-x: clip;
   }
 
   .footer-logo {
@@ -2234,9 +2281,9 @@ footer {
 .form-group input:focus,
 .form-group select:focus,
 .form-group textarea:focus {
-  border-color: #e63946;
+  border-color: var(--red);
   background: #161824;
-  box-shadow: 0 0 0 2px rgba(230, 57, 70, 0.35);
+  box-shadow: 0 0 0 2px rgba(193, 18, 31, 0.35);
 }
 
 .form-error {
