@@ -6,25 +6,42 @@ export const dynamic = "force-dynamic";
 export default async function AdminDashboardPage() {
   const supabase = createAdminClient();
 
-  // Fetch metrics in parallel
-  const [
-    { count: vipCount },
-    { data: recentVipMembers },
-    { data: shows },
-    { data: releases },
-    { data: inquiries, count: newInquiriesCount },
-  ] = await Promise.all([
-    supabase.from("vip_members").select("*", { count: "exact", head: true }),
-    supabase.from("vip_members").select("*").order("created_at", { ascending: false }).limit(5),
-    supabase.from("shows").select("*").order("event_date", { ascending: true }),
-    supabase.from("releases").select("*").order("display_order", { ascending: true }),
-    supabase.from("booking_inquiries").select("*", { count: "exact" }).order("created_at", { ascending: false }).limit(5),
-  ]);
+  let vipCount = 0;
+  let recentVipMembers: any[] = [];
+  let shows: any[] = [];
+  let releases: any[] = [];
+  let inquiries: any[] = [];
+  let newInquiriesCount = 0;
+
+  try {
+    const [
+      vipRes,
+      recentVipRes,
+      showsRes,
+      releasesRes,
+      inquiriesRes,
+    ] = await Promise.all([
+      supabase.from("vip_members").select("*", { count: "exact", head: true }),
+      supabase.from("vip_members").select("*").order("created_at", { ascending: false }).limit(5),
+      supabase.from("shows").select("*").order("event_date", { ascending: true }),
+      supabase.from("releases").select("*").order("display_order", { ascending: true }),
+      supabase.from("booking_inquiries").select("*", { count: "exact" }).order("created_at", { ascending: false }).limit(5),
+    ]);
+
+    vipCount = vipRes.count || 0;
+    recentVipMembers = recentVipRes.data || [];
+    shows = showsRes.data || [];
+    releases = releasesRes.data || [];
+    inquiries = inquiriesRes.data || [];
+    newInquiriesCount = inquiriesRes.count || 0;
+  } catch (err) {
+    console.error("Admin dashboard data fetch error:", err);
+  }
 
   const now = new Date();
-  const upcomingShows = (shows || []).filter((s) => new Date(s.event_date) >= now && s.is_published);
+  const upcomingShows = shows.filter((s) => new Date(s.event_date) >= now && s.is_published);
   const nearestShow = upcomingShows[0] || null;
-  const featuredRelease = (releases || []).find((r) => r.is_featured) || (releases || [])[0] || null;
+  const featuredRelease = releases.find((r) => r.is_featured) || releases[0] || null;
 
   return (
     <div>
