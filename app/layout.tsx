@@ -73,16 +73,6 @@ export const metadata: Metadata = {
     site: "@JayDubbThaRuler",
     images: ["https://jaydubbtharuler.com/og.png"],
   },
-  icons: {
-    icon: [
-      { url: "/favicon.ico" },
-      { url: "/favicon.png", type: "image/png" },
-      { url: "/icon.png", type: "image/png" },
-    ],
-    shortcut: "/favicon.png",
-    apple: "/apple-icon.png",
-  },
-  manifest: "/site.webmanifest",
 };
 
 export default function RootLayout({
@@ -99,6 +89,7 @@ export default function RootLayout({
         <link rel="icon" type="image/png" sizes="512x512" href="/icon.png" />
         <link rel="apple-touch-icon" href="/apple-icon.png" />
         <link rel="shortcut icon" href="/favicon.png" />
+        <link rel="manifest" href="/site.webmanifest" />
         <link rel="preconnect" href="https://www.youtube.com" />
         <link rel="preconnect" href="https://open.spotify.com" />
         <link rel="preconnect" href="https://music.apple.com" />
