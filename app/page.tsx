@@ -6,6 +6,8 @@ import { VipForm } from "@/components/vip-form";
 import { BookingForm } from "@/components/booking-form";
 import { ScrollExperience } from "@/components/scroll-experience";
 
+export const revalidate = 60;
+
 const releases = [
   {
     year: "2026",

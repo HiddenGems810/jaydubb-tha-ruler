@@ -516,6 +516,101 @@ ON CONFLICT (slug) DO UPDATE SET
   description = EXCLUDED.description,
   is_published = true;
 
+-- Verified Upcoming Shows Seed
+INSERT INTO public.shows (slug, title, venue_name, address, city, state_region, country, timezone, event_date, doors_time, ticket_url, status, is_featured, is_published, supporting_text)
+VALUES
+  (
+    'rialto-theatre-tucson-2026-09-15',
+    'Bravo the Bagchaser & Peysoh - Sounds by DJ Trill',
+    'Rialto Theatre',
+    '318 E. Congress St.',
+    'Tucson',
+    'AZ',
+    'USA',
+    'America/Phoenix',
+    '2026-09-15T20:00:00-07:00',
+    '2026-09-15T19:00:00-07:00',
+    'https://www.ticketmaster.com/event/190064EB912E33E1',
+    'scheduled',
+    false,
+    true,
+    'Featuring JayDubb Tha Ruler, Bravo the Bagchaser, Peysoh & DJ Trill · Cashless Venue'
+  ),
+  (
+    'black-sheep-colorado-springs-2026-09-19',
+    'Bravo the Bagchaser & Peysoh Live at The Black Sheep',
+    'The Black Sheep',
+    '2106 E. Platte Ave.',
+    'Colorado Springs',
+    'CO',
+    'USA',
+    'America/Denver',
+    '2026-09-19T20:00:00-06:00',
+    '2026-09-19T19:00:00-06:00',
+    'https://www.ticketweb.com/event/bravo-the-bagchaser-peysoh-black-sheep-tickets/14252334',
+    'scheduled',
+    true,
+    true,
+    'Hometown Colorado Springs Showcase · All Ages · JayDubb Tha Ruler Live'
+  ),
+  (
+    'the-crocodile-seattle-2026-09-23',
+    'Bravo the Bagchaser & Peysoh - Sounds by DJ Trill',
+    'The Crocodile',
+    '2505 1st Avenue',
+    'Seattle',
+    'WA',
+    'USA',
+    'America/Los_Angeles',
+    '2026-09-23T20:00:00-07:00',
+    '2026-09-23T19:00:00-07:00',
+    'https://app.opendate.io/e/bravo-the-bagchaser-peysoh-sounds-by-dj-trill-september-23-2026-720862',
+    'scheduled',
+    false,
+    true,
+    'All Ages · JayDubb Tha Ruler, Bravo the Bagchaser, Peysoh & DJ Trill'
+  ),
+  (
+    'hawthorne-theatre-portland-2026-09-24',
+    'Bravo the Bagchaser & Peysoh Live in Portland',
+    'Hawthorne Theatre',
+    '1507 SE 39th Ave',
+    'Portland',
+    'OR',
+    'USA',
+    'America/Los_Angeles',
+    '2026-09-24T20:00:00-07:00',
+    '2026-09-24T19:00:00-07:00',
+    'https://www.etix.com/ticket/p/80591442/bravo-the-bagchaser-peysoh-portland-hawthorne-theatre',
+    'scheduled',
+    false,
+    true,
+    'All Ages · Featuring JayDubb Tha Ruler, Bravo the Bagchaser & Peysoh'
+  ),
+  (
+    'the-observatory-santa-ana-2026-10-23',
+    'Bravo the Bagchaser & Peysoh - Sounds by DJ Trill',
+    'The Observatory',
+    '3503 S. Harbor Blvd',
+    'Santa Ana',
+    'CA',
+    'USA',
+    'America/Los_Angeles',
+    '2026-10-23T20:00:00-07:00',
+    '2026-10-23T19:00:00-07:00',
+    'https://www.ticketmaster.com/event/090064EB26948D0C',
+    'scheduled',
+    false,
+    true,
+    'All Ages · JayDubb Tha Ruler Live in Southern California'
+  )
+ON CONFLICT (slug) DO UPDATE SET
+  title = EXCLUDED.title,
+  venue_name = EXCLUDED.venue_name,
+  ticket_url = EXCLUDED.ticket_url,
+  event_date = EXCLUDED.event_date,
+  is_published = true;
+
 -- Site Settings Seed
 INSERT INTO public.site_settings (key, value, description, is_public)
 VALUES
