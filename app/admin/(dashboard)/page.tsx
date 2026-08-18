@@ -1,5 +1,11 @@
 import Link from "next/link";
 import { createAdminClient } from "@/lib/supabase/admin";
+import type { Database } from "@/types/database";
+
+type Show = Database["public"]["Tables"]["shows"]["Row"];
+type Release = Database["public"]["Tables"]["releases"]["Row"];
+type VipMember = Database["public"]["Tables"]["vip_members"]["Row"];
+type BookingInquiry = Database["public"]["Tables"]["booking_inquiries"]["Row"];
 
 export const dynamic = "force-dynamic";
 
@@ -7,10 +13,10 @@ export default async function AdminDashboardPage() {
   const supabase = createAdminClient();
 
   let vipCount = 0;
-  let recentVipMembers: any[] = [];
-  let shows: any[] = [];
-  let releases: any[] = [];
-  let inquiries: any[] = [];
+  let recentVipMembers: VipMember[] = [];
+  let shows: Show[] = [];
+  let releases: Release[] = [];
+  let inquiries: BookingInquiry[] = [];
   let newInquiriesCount = 0;
 
   try {
