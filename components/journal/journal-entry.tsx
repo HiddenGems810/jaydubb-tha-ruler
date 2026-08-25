@@ -30,7 +30,7 @@ export function JournalEntryBody({ entry, mediaBasePath }: { entry: JournalEntry
     switch (block.type) {
       case "paragraph": return <p key={block.id}><InlineText text={block.text} /></p>;
       case "heading": return block.level === 2 ? <h2 key={block.id}>{block.text}</h2> : <h3 key={block.id}>{block.text}</h3>;
-      case "quote": return <blockquote key={block.id}><p><InlineText text={block.text} /></p>{block.attribution ? <cite>— {block.attribution}</cite> : null}</blockquote>;
+      case "quote": return <blockquote key={block.id}><p><InlineText text={block.text} /></p>{block.attribution ? <cite>- {block.attribution}</cite> : null}</blockquote>;
       case "pull_quote": return <aside className="journal-pull" key={block.id}><InlineText text={block.text} /></aside>;
       case "image": return <div className={`journal-media-block is-${block.mode}`} key={block.id}>{figure(block.mediaId)}</div>;
       case "full_width_media": return <div className="journal-media-block is-full" key={block.id}>{figure(block.mediaId)}</div>;

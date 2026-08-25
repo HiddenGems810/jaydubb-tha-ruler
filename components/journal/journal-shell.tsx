@@ -19,7 +19,7 @@ export function JournalShell({ children }: { children: React.ReactNode }) {
       </header>
       <main id="journal-main">{children}</main>
       <footer className="journal-footer">
-        <p>JayDubb Tha Ruler — Colorado to worldwide.</p>
+        <p>JayDubb Tha Ruler - Colorado to worldwide.</p>
         <div><Link href="/journal">Archive</Link><Link href="/journal/rss.xml">RSS</Link><Link href="/">Main site</Link></div>
       </footer>
     </div>

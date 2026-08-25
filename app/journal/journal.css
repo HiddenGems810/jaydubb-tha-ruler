@@ -69,21 +69,21 @@
 .journal-empty p { max-width: 34rem; color: var(--j-muted); font: 1.2rem/1.6 Georgia, serif; }
 .journal-empty a { margin-top: 2rem; padding-bottom: .3rem; border-bottom: 2px solid var(--j-red); font: 700 .7rem/1 var(--font-mono), monospace; letter-spacing: .13em; text-transform: uppercase; }
 
-.journal-entry-header { min-height: 74vh; padding: clamp(2rem, 5vw, 5rem) clamp(1rem, 6vw, 7rem) 3rem; display: flex; flex-direction: column; }
-.journal-back { align-self: flex-start; font: 700 .66rem/1 var(--font-mono), monospace; letter-spacing: .12em; text-transform: uppercase; }
-.journal-entry-index { margin-top: auto; display: flex; justify-content: space-between; color: var(--j-red); font: 700 .65rem/1 var(--font-mono), monospace; letter-spacing: .14em; text-transform: uppercase; }
-.journal-entry-header h1 { max-width: 12ch; margin: 1.2rem 0 1.8rem; font: 900 clamp(4rem, 12vw, 12rem)/.78 var(--font-display), Impact, sans-serif; letter-spacing: .025em; text-transform: uppercase; text-wrap: balance; }
-.journal-entry-header > p { max-width: 42rem; margin: 0 0 2.5rem 24%; font: clamp(1.25rem, 2.2vw, 2rem)/1.35 Georgia, serif; text-wrap: balance; }
-.journal-entry-meta { display: flex; gap: 2rem; padding-top: 1rem; border-top: 1px solid var(--j-ink); font: 700 .65rem/1 var(--font-mono), monospace; letter-spacing: .12em; text-transform: uppercase; }
+.journal-entry-header { width: min(100%, 96rem); min-height: min(68svh, 48rem); margin: 0 auto; padding: clamp(2rem, 5vw, 5rem) clamp(1rem, 6vw, 7rem) 3rem; display: flex; flex-direction: column; }
+.journal-back { align-self: flex-start; padding-bottom: .45rem; border-bottom: 1px solid currentColor; font: 700 .66rem/1 var(--font-mono), monospace; letter-spacing: .12em; text-transform: uppercase; }
+.journal-entry-index { margin-top: clamp(4.5rem, 12vh, 8rem); display: flex; justify-content: space-between; color: var(--j-red); font: 700 .65rem/1 var(--font-mono), monospace; letter-spacing: .14em; text-transform: uppercase; }
+.journal-entry-header h1 { max-width: 14ch; margin: 1.4rem 0 1.7rem; font: 900 clamp(3.6rem, 10vw, 10.5rem)/.82 var(--font-display), Impact, sans-serif; letter-spacing: .025em; text-transform: uppercase; text-wrap: balance; }
+.journal-entry-header > p { max-width: 38rem; margin: 0 0 2.5rem clamp(1rem, 12vw, 12rem); font: clamp(1.2rem, 2vw, 1.85rem)/1.42 Georgia, serif; text-wrap: balance; }
+.journal-entry-meta { width: min(100%, 42rem); display: flex; gap: 2rem; padding-top: 1rem; border-top: 1px solid var(--j-ink); font: 700 .65rem/1 var(--font-mono), monospace; letter-spacing: .12em; text-transform: uppercase; }
 .journal-entry-cover { margin: 0; background: #181816; }
 .journal-entry-cover img, .journal-entry-cover video { display: block; width: 100%; max-height: 88vh; object-fit: cover; }
 .journal-entry-cover figcaption { padding: .7rem 1rem; color: #aaa59b; background: #181816; font: .68rem/1.5 var(--font-mono), monospace; }
 
-.journal-body { padding: clamp(4rem, 9vw, 9rem) 1rem; overflow: hidden; }
+.journal-body { padding: clamp(5rem, 10vw, 10rem) 1rem; overflow: hidden; }
 .journal-body > p, .journal-body > h2, .journal-body > h3, .journal-body > blockquote, .journal-link-card, .journal-unavailable { width: min(100%, 43rem); margin-right: auto; margin-left: auto; }
-.journal-body > p { margin-top: 0; margin-bottom: 1.7rem; font: clamp(1.08rem, 1.5vw, 1.28rem)/1.72 Georgia, serif; }
+.journal-body > p { margin-top: 0; margin-bottom: 1.9rem; font: clamp(1.08rem, 1.5vw, 1.3rem)/1.78 Georgia, serif; }
 .journal-body > p:first-child::first-letter { float: left; margin: .08em .12em 0 0; color: var(--j-red); font: 900 5.6rem/.7 var(--font-display), Impact, sans-serif; }
-.journal-body h2 { margin-top: 5rem; margin-bottom: 1.5rem; font: 900 clamp(2.8rem, 6vw, 6rem)/.86 var(--font-display), Impact, sans-serif; letter-spacing: -.035em; text-transform: uppercase; }
+.journal-body h2 { margin-top: 6rem; margin-bottom: 1.6rem; font: 900 clamp(2.8rem, 6vw, 6rem)/.9 var(--font-display), Impact, sans-serif; letter-spacing: -.01em; text-transform: uppercase; }
 .journal-body h3 { margin-top: 3rem; margin-bottom: 1rem; font: 900 clamp(1.8rem, 3.5vw, 3.2rem)/.92 var(--font-display), Impact, sans-serif; text-transform: uppercase; }
 .journal-body p a { text-decoration: underline; text-decoration-color: var(--j-red); text-underline-offset: .18em; }
 .journal-body blockquote { margin-top: 4rem; margin-bottom: 4rem; padding: 2rem 0 2rem clamp(1rem, 5vw, 4rem); border-top: 1px solid var(--j-ink); border-bottom: 1px solid var(--j-ink); }
