@@ -10,6 +10,14 @@ async function journalMigration() {
   return readFile(new URL(filename, directory), "utf8");
 }
 
+async function adminHelperGrantMigration() {
+  const directory = new URL("../supabase/migrations/", import.meta.url);
+  const files = await readdir(directory);
+  const filename = files.find((file) => file.endsWith("_secure_is_admin_function.sql"));
+  assert.ok(filename, "is_admin permission migration must exist");
+  return readFile(new URL(filename, directory), "utf8");
+}
+
 test("Journal migration creates constrained entry and media tables", async () => {
   const sql = await journalMigration();
 
@@ -62,4 +70,11 @@ test("Journal mutation helpers are invoker-secured and explicitly permissioned",
   assert.doesNotMatch(sql, /security definer/i);
   assert.match(sql, /revoke all on function public\.set_featured_journal_entry/i);
   assert.match(sql, /grant execute on function public\.set_featured_journal_entry.*to authenticated/i);
+});
+
+test("admin helper is not executable by anonymous callers", async () => {
+  const sql = await adminHelperGrantMigration();
+
+  assert.match(sql, /revoke execute on function public\.is_admin\(\) from anon/i);
+  assert.match(sql, /grant execute on function public\.is_admin\(\) to authenticated/i);
 });

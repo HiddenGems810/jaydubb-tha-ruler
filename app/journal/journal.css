@@ -28,7 +28,7 @@
 
 .journal-masthead { min-height: 72vh; padding: clamp(2rem, 5vw, 5rem) clamp(1rem, 3vw, 3rem) 2rem; display: flex; flex-direction: column; justify-content: space-between; overflow: hidden; border-bottom: 1px solid var(--j-ink); }
 .journal-masthead-top, .journal-rule { display: flex; justify-content: space-between; font: 700 .65rem/1.2 var(--font-mono), monospace; letter-spacing: .16em; text-transform: uppercase; }
-.journal-masthead h1 { margin: auto 0 0; font-family: var(--font-display), Impact, sans-serif; font-size: clamp(5.4rem, 18vw, 17rem); font-weight: 900; line-height: .72; letter-spacing: -.055em; text-transform: uppercase; white-space: nowrap; animation: journal-title 900ms cubic-bezier(.16,1,.3,1) both; }
+.journal-masthead h1 { margin: auto 0 0; font-family: var(--font-display), Impact, sans-serif; font-size: clamp(5.4rem, 18vw, 17rem); font-weight: 900; line-height: .72; letter-spacing: -.015em; text-transform: uppercase; white-space: nowrap; animation: journal-title 900ms cubic-bezier(.16,1,.3,1) both; }
 .journal-masthead h1 span { color: transparent; -webkit-text-stroke: clamp(1px, .12vw, 3px) var(--j-ink); }
 .journal-masthead > p { max-width: 35rem; margin: clamp(2rem, 5vw, 4rem) 0 3rem 27%; font-family: Georgia, serif; font-size: clamp(1.4rem, 2.5vw, 2.4rem); line-height: 1.18; text-wrap: balance; }
 .journal-rule { padding-top: 1rem; border-top: 1px solid var(--j-ink); }
@@ -65,7 +65,7 @@
 
 .journal-empty { min-height: 68vh; padding: clamp(5rem, 13vw, 12rem) clamp(1rem, 8vw, 9rem); display: flex; flex-direction: column; align-items: flex-start; justify-content: center; }
 .journal-empty > span { color: var(--j-red); font: 700 .68rem/1 var(--font-mono), monospace; letter-spacing: .14em; text-transform: uppercase; }
-.journal-empty h1, .journal-empty h2 { max-width: 12ch; margin: 1.2rem 0; font: 900 clamp(3.5rem, 10vw, 10rem)/.82 var(--font-display), Impact, sans-serif; letter-spacing: -.045em; text-transform: uppercase; text-wrap: balance; }
+.journal-empty h1, .journal-empty h2 { max-width: 12ch; margin: 1.2rem 0; font: 900 clamp(3.5rem, 10vw, 10rem)/.92 var(--font-display), Impact, sans-serif; line-height: .92; letter-spacing: -.015em; text-transform: uppercase; text-wrap: balance; }
 .journal-empty p { max-width: 34rem; color: var(--j-muted); font: 1.2rem/1.6 Georgia, serif; }
 .journal-empty a { margin-top: 2rem; padding-bottom: .3rem; border-bottom: 2px solid var(--j-red); font: 700 .7rem/1 var(--font-mono), monospace; letter-spacing: .13em; text-transform: uppercase; }
 

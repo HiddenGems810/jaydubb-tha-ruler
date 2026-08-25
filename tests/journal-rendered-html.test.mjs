@@ -1,4 +1,5 @@
 import assert from "node:assert/strict";
+import { readFile } from "node:fs/promises";
 import test from "node:test";
 
 async function request(path) {
@@ -8,12 +9,11 @@ async function request(path) {
   return worker.fetch(new Request(`http://localhost${path}`, { headers: { accept: "text/html" } }), { ASSETS: { fetch: async () => new Response("Not found", { status: 404 }) } }, { waitUntil() {}, passThroughOnException() {} });
 }
 
-test("Journal archive renders an intentional empty state before content is published", async () => {
+test("Journal archive renders its stable archive chrome", async () => {
   const response = await request("/journal");
   assert.equal(response.status, 200);
   const html = await response.text();
   assert.match(html, /THE[\s\S]*JOURNAL/i);
-  assert.match(html, /first page is being written/i);
   assert.match(html, /Skip to Journal/i);
   assert.match(html, /application\/rss\+xml/i);
 });
@@ -37,4 +37,28 @@ test("dynamic sitemap preserves releases and adds the Journal", async () => {
   const xml = await response.text();
   assert.match(xml, /jaydubbtharuler\.com\/journal/);
   assert.match(xml, /releases\/shake-it-bae/);
+});
+
+test("Journal empty-state heading keeps multi-line text readable", async () => {
+  const stylesheetUrl = new URL("../app/journal/journal.css", import.meta.url);
+  const stylesheet = await readFile(stylesheetUrl, "utf8");
+
+  assert.match(
+    stylesheet,
+    /\.journal-empty h1, \.journal-empty h2 \{[^}]*line-height:\s*\.92;/s,
+  );
+});
+
+test("Journal display headings use breathing room between letters", async () => {
+  const stylesheetUrl = new URL("../app/journal/journal.css", import.meta.url);
+  const stylesheet = await readFile(stylesheetUrl, "utf8");
+
+  assert.match(
+    stylesheet,
+    /\.journal-masthead h1 \{[^}]*letter-spacing:\s*-.015em;/s,
+  );
+  assert.match(
+    stylesheet,
+    /\.journal-empty h1, \.journal-empty h2 \{[^}]*letter-spacing:\s*-.015em;/s,
+  );
 });
