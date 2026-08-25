@@ -1,7 +1,7 @@
 # Journal / Journey Experience Design
 
-**Date:** 2026-08-23  
-**Status:** Approved for implementation  
+**Date:** 2026-08-23
+**Status:** Approved for implementation
 **Risk class:** R2 — schema, storage, authorization, public routes, and admin workflow
 
 ## Objective
