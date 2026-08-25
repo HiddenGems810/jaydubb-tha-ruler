@@ -10,6 +10,12 @@
     "build": "next build && vinext build",
     "start": "next start",
     "test": "npm run build && node --test tests/rendered-html.test.mjs tests/supabase-security.test.mjs",
+    "test:env": "node --experimental-strip-types --test tests/supabase-env.test.mjs",
+    "test:journal": "node --experimental-strip-types --test tests/journal-contract.test.mjs",
+    "test:rendered": "node --test tests/rendered-html.test.mjs tests/journal-rendered-html.test.mjs",
+    "test:security": "node --test tests/supabase-security.test.mjs tests/journal-security.test.mjs",
+    "test:migration": "node --test tests/journal-migration.test.mjs",
+    "typecheck": "tsc --noEmit",
     "lint": "eslint . --ignore-pattern dist --ignore-pattern .next"
   },
   "dependencies": {
@@ -22,6 +28,7 @@
     "react-dom": "19.2.8"
   },
   "overrides": {
+    "nanoid": "3.3.18",
     "next": {
       "postcss": "8.5.25",
       "sharp": "0.35.3"

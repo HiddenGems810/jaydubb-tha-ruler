@@ -18,6 +18,7 @@ export default async function AdminDashboardPage() {
   let releases: Release[] = [];
   let inquiries: BookingInquiry[] = [];
   let newInquiriesCount = 0;
+  let journalCount = 0;
 
   try {
     const [
@@ -26,12 +27,14 @@ export default async function AdminDashboardPage() {
       showsRes,
       releasesRes,
       inquiriesRes,
+      journalRes,
     ] = await Promise.all([
       supabase.from("vip_members").select("*", { count: "exact", head: true }),
       supabase.from("vip_members").select("*").order("created_at", { ascending: false }).limit(5),
       supabase.from("shows").select("*").order("event_date", { ascending: true }),
       supabase.from("releases").select("*").order("display_order", { ascending: true }),
       supabase.from("booking_inquiries").select("*", { count: "exact" }).order("created_at", { ascending: false }).limit(5),
+      supabase.from("journal_entries").select("id", { count: "exact", head: true }),
     ]);
 
     vipCount = vipRes.count || 0;
@@ -40,6 +43,7 @@ export default async function AdminDashboardPage() {
     releases = releasesRes.data || [];
     inquiries = inquiriesRes.data || [];
     newInquiriesCount = inquiriesRes.count || 0;
+    journalCount = journalRes.count || 0;
   } catch (err) {
     console.error("Admin dashboard data fetch error:", err);
   }
@@ -59,6 +63,9 @@ export default async function AdminDashboardPage() {
           </Link>
           <Link href="/admin/vip" className="btn btn-secondary btn-sm">
             VIP Fan List
+          </Link>
+          <Link href="/admin/journal/new" className="btn btn-secondary btn-sm">
+            + Journal Entry
           </Link>
         </div>
       </header>
@@ -92,6 +99,12 @@ export default async function AdminDashboardPage() {
             <span className="metric-label">Pending Inquiries</span>
             <span className="metric-value">{newInquiriesCount || 0}</span>
             <span className="metric-meta">Booking &amp; press requests</span>
+          </div>
+
+          <div className="metric-card">
+            <span className="metric-label">Journal Entries</span>
+            <span className="metric-value">{journalCount}</span>
+            <span className="metric-meta"><Link href="/admin/journal">Open publishing desk →</Link></span>
           </div>
         </div>
 

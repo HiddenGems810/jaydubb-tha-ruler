@@ -1,6 +1,7 @@
 import { createServerClient } from "@supabase/ssr";
 import { cookies } from "next/headers";
 import { NextResponse } from "next/server";
+import { getSupabasePublicEnv } from "@/lib/supabase/env";
 import type { Database } from "@/types/database";
 
 export async function GET(request: Request) {
@@ -10,12 +11,9 @@ export async function GET(request: Request) {
 
   if (code) {
     const cookieStore = await cookies();
-    const supabaseUrl =
-      process.env.NEXT_PUBLIC_SUPABASE_URL || "https://bmhuposxkvkeupzkweyc.supabase.co";
-    const supabaseAnonKey =
-      process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || "sb_publishable_fZxuUQX1jCQh-KhdlJlwQw_YWukGMB0";
+    const { url, anonKey } = getSupabasePublicEnv();
 
-    const supabase = createServerClient<Database>(supabaseUrl, supabaseAnonKey, {
+    const supabase = createServerClient<Database>(url, anonKey, {
       cookies: {
         getAll() {
           return cookieStore.getAll();

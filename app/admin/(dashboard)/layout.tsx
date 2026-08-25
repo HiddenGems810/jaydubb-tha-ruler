@@ -94,6 +94,13 @@ export default async function AdminDashboardLayout({
             </svg>
             Shows &amp; Tour
           </Link>
+          <Link href="/admin/journal" className="admin-nav-item">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
+              <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20" />
+              <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2Z" />
+            </svg>
+            Journal / Journey
+          </Link>
           <Link href="/admin/vip" className="admin-nav-item">
             <svg
               width="16"
@@ -215,7 +222,15 @@ export default async function AdminDashboardLayout({
         </div>
       </aside>
 
-      <div className="admin-main">{children}</div>
+      <div className="admin-main">
+        <nav className="admin-mobile-nav" aria-label="Mobile admin navigation">
+          <Link href="/admin">Dashboard</Link>
+          <Link href="/admin/journal">Journal</Link>
+          <Link href="/admin/shows">Shows</Link>
+          <Link href="/admin/inquiries">Inquiries</Link>
+        </nav>
+        {children}
+      </div>
     </div>
   );
 }

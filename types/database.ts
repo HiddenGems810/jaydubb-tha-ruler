@@ -89,6 +89,152 @@ export type Database = {
         }
         Relationships: []
       }
+      journal_entries: {
+        Row: {
+          content: Json
+          cover_media_id: string | null
+          created_at: string
+          created_by: string | null
+          entry_number: number
+          entry_type: Database["public"]["Enums"]["journal_entry_type"]
+          event_date: string | null
+          excerpt: string | null
+          featured_at: string | null
+          id: string
+          location: string | null
+          og_media_id: string | null
+          published_at: string | null
+          seo_description: string | null
+          seo_title: string | null
+          slug: string
+          status: Database["public"]["Enums"]["journal_status"]
+          title: string
+          updated_at: string
+          updated_by: string | null
+        }
+        Insert: {
+          content?: Json
+          cover_media_id?: string | null
+          created_at?: string
+          created_by?: string | null
+          entry_number?: number
+          entry_type?: Database["public"]["Enums"]["journal_entry_type"]
+          event_date?: string | null
+          excerpt?: string | null
+          featured_at?: string | null
+          id?: string
+          location?: string | null
+          og_media_id?: string | null
+          published_at?: string | null
+          seo_description?: string | null
+          seo_title?: string | null
+          slug: string
+          status?: Database["public"]["Enums"]["journal_status"]
+          title: string
+          updated_at?: string
+          updated_by?: string | null
+        }
+        Update: {
+          content?: Json
+          cover_media_id?: string | null
+          created_at?: string
+          created_by?: string | null
+          entry_number?: number
+          entry_type?: Database["public"]["Enums"]["journal_entry_type"]
+          event_date?: string | null
+          excerpt?: string | null
+          featured_at?: string | null
+          id?: string
+          location?: string | null
+          og_media_id?: string | null
+          published_at?: string | null
+          seo_description?: string | null
+          seo_title?: string | null
+          slug?: string
+          status?: Database["public"]["Enums"]["journal_status"]
+          title?: string
+          updated_at?: string
+          updated_by?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "journal_entries_cover_media_id_fkey"
+            columns: ["cover_media_id"]
+            isOneToOne: false
+            referencedRelation: "journal_media"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "journal_entries_og_media_id_fkey"
+            columns: ["og_media_id"]
+            isOneToOne: false
+            referencedRelation: "journal_media"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      journal_media: {
+        Row: {
+          alt_text: string | null
+          blur_data_url: string | null
+          caption: string | null
+          created_at: string
+          credit: string | null
+          entry_id: string
+          file_size_bytes: number | null
+          height: number | null
+          id: string
+          kind: Database["public"]["Enums"]["journal_media_kind"]
+          mime_type: string
+          sort_order: number
+          storage_path: string
+          updated_at: string
+          width: number | null
+        }
+        Insert: {
+          alt_text?: string | null
+          blur_data_url?: string | null
+          caption?: string | null
+          created_at?: string
+          credit?: string | null
+          entry_id: string
+          file_size_bytes?: number | null
+          height?: number | null
+          id?: string
+          kind?: Database["public"]["Enums"]["journal_media_kind"]
+          mime_type: string
+          sort_order?: number
+          storage_path: string
+          updated_at?: string
+          width?: number | null
+        }
+        Update: {
+          alt_text?: string | null
+          blur_data_url?: string | null
+          caption?: string | null
+          created_at?: string
+          credit?: string | null
+          entry_id?: string
+          file_size_bytes?: number | null
+          height?: number | null
+          id?: string
+          kind?: Database["public"]["Enums"]["journal_media_kind"]
+          mime_type?: string
+          sort_order?: number
+          storage_path?: string
+          updated_at?: string
+          width?: number | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "journal_media_entry_id_fkey"
+            columns: ["entry_id"]
+            isOneToOne: false
+            referencedRelation: "journal_entries"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       media_items: {
         Row: {
           alt_text: string
@@ -469,9 +615,28 @@ export type Database = {
     }
     Functions: {
       is_admin: { Args: never; Returns: boolean }
+      reorder_journal_media: {
+        Args: { ordered_ids: string[]; target_entry_id: string }
+        Returns: Database["public"]["Tables"]["journal_media"]["Row"][]
+      }
+      set_featured_journal_entry: {
+        Args: { target_id: string }
+        Returns: Database["public"]["Tables"]["journal_entries"]["Row"]
+      }
     }
     Enums: {
       inquiry_status: "new" | "in_review" | "responded" | "booked" | "archived"
+      journal_entry_type:
+        | "journal"
+        | "photo_dump"
+        | "on_the_road"
+        | "studio"
+        | "release_notes"
+        | "behind_the_scenes"
+        | "personal"
+        | "milestone"
+      journal_media_kind: "image" | "video"
+      journal_status: "draft" | "scheduled" | "published" | "archived"
       media_type: "image" | "video_embed" | "audio"
       member_status: "active" | "unsubscribed" | "bounced"
       release_type: "single" | "ep" | "album" | "mixtape"
@@ -609,6 +774,18 @@ export const Constants = {
   public: {
     Enums: {
       inquiry_status: ["new", "in_review", "responded", "booked", "archived"],
+      journal_entry_type: [
+        "journal",
+        "photo_dump",
+        "on_the_road",
+        "studio",
+        "release_notes",
+        "behind_the_scenes",
+        "personal",
+        "milestone",
+      ],
+      journal_media_kind: ["image", "video"],
+      journal_status: ["draft", "scheduled", "published", "archived"],
       media_type: ["image", "video_embed", "audio"],
       member_status: ["active", "unsubscribed", "bounced"],
       release_type: ["single", "ep", "album", "mixtape"],

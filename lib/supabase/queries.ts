@@ -1,4 +1,5 @@
 import { createClient as createSupabaseClient } from "@supabase/supabase-js";
+import { getSupabasePublicEnv } from "@/lib/supabase/env";
 import type { Database } from "@/types/database";
 
 export type Show = Database["public"]["Tables"]["shows"]["Row"];
@@ -11,10 +12,9 @@ export type VipMember = Database["public"]["Tables"]["vip_members"]["Row"];
 export type BookingInquiry = Database["public"]["Tables"]["booking_inquiries"]["Row"];
 
 function getPublicClient() {
-  const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || "https://bmhuposxkvkeupzkweyc.supabase.co";
-  const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || "sb_publishable_fZxuUQX1jCQh-KhdlJlwQw_YWukGMB0";
+  const { url, anonKey } = getSupabasePublicEnv();
 
-  return createSupabaseClient<Database>(supabaseUrl, supabaseAnonKey, {
+  return createSupabaseClient<Database>(url, anonKey, {
     auth: {
       persistSession: false,
       autoRefreshToken: false,

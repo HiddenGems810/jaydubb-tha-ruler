@@ -1,7 +1,13 @@
 import { createClient } from "@supabase/supabase-js";
 
-const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || "https://bmhuposxkvkeupzkweyc.supabase.co";
-const serviceRoleKey = process.env.SUPABASE_SERVICE_ROLE_KEY || "sb_secret_4eNRwctPWNlfKWBEPlyvlw_WWNF5y11";
+function required(name) {
+  const value = process.env[name]?.trim();
+  if (!value) throw new Error(`Missing required environment variable: ${name}`);
+  return value;
+}
+
+const supabaseUrl = required("NEXT_PUBLIC_SUPABASE_URL");
+const serviceRoleKey = required("SUPABASE_SERVICE_ROLE_KEY");
 
 const supabase = createClient(supabaseUrl, serviceRoleKey, {
   auth: {
@@ -10,20 +16,17 @@ const supabase = createClient(supabaseUrl, serviceRoleKey, {
   },
 });
 
-const admins = [
-  {
-    email: "info.tagdesigns@gmail.com",
-    password: "Fashion101Shay7895@@",
-    username: "TAGDesigns",
-    role: "super_admin",
-  },
-  {
-    email: "wallajay@live.com",
-    password: "JayBird_10",
-    username: "JayDubbThaRuler",
-    role: "artist_owner",
-  },
-];
+const admins = JSON.parse(required("ADMIN_SEED_USERS_JSON"));
+
+if (!Array.isArray(admins) || admins.length === 0) {
+  throw new Error("ADMIN_SEED_USERS_JSON must be a non-empty JSON array");
+}
+
+for (const admin of admins) {
+  if (!admin?.email || !admin?.password || !admin?.username || !admin?.role) {
+    throw new Error("Each admin seed record requires email, password, username, and role");
+  }
+}
 
 async function provisionAdmins() {
   console.log("=== Provisioning Authorized Admin Accounts in Supabase ===");

@@ -5,6 +5,7 @@ import { ShowsSection } from "@/components/shows-section";
 import { VipForm } from "@/components/vip-form";
 import { BookingForm } from "@/components/booking-form";
 import { ScrollExperience } from "@/components/scroll-experience";
+import { getLatestJournalEntry } from "@/lib/journal/queries";
 
 export const revalidate = 60;
 
@@ -210,7 +211,10 @@ function Arrow() {
 }
 
 export default async function Home() {
-  const shows = await getAllPublishedShows();
+  const [shows, latestJournalEntry] = await Promise.all([
+    getAllPublishedShows(),
+    getLatestJournalEntry(),
+  ]);
   return (
     <>
       <ScrollExperience />
@@ -234,6 +238,7 @@ export default async function Home() {
           <a href="#video">Video</a>
           <a href="#shows">Shows</a>
           <a href="#story">Story</a>
+          <Link href="/journal">Journal</Link>
           <a href="#press">Press</a>
           <a href="#the-7">The 7</a>
           <a href="#vip">VIP</a>
@@ -697,6 +702,16 @@ export default async function Home() {
           </div>
         </section>
 
+        {latestJournalEntry ? (
+          <section className="home-journal" aria-labelledby="home-journal-title">
+            <div className="section-marker"><span>10</span><span>Journal</span></div>
+            <div className="home-journal-grid">
+              <div><p className="eyebrow">Latest from the archive</p><h2 id="home-journal-title">{latestJournalEntry.title}</h2>{latestJournalEntry.excerpt ? <p>{latestJournalEntry.excerpt}</p> : null}</div>
+              <div className="home-journal-actions"><Link className="button button-primary" href={`/journal/${latestJournalEntry.slug}`}>Read entry <Arrow /></Link><Link className="text-link" href="/journal">Browse the Journal <Arrow /></Link></div>
+            </div>
+          </section>
+        ) : null}
+
         <section className="contact-section" id="contact" aria-labelledby="contact-title">
           <div className="contact-image">
             <Image
@@ -709,7 +724,7 @@ export default async function Home() {
           </div>
           <div className="contact-copy">
             <div className="section-marker">
-              <span>10</span>
+              <span>11</span>
               <span>Booking</span>
             </div>
             <p className="eyebrow" style={{ marginTop: "1rem" }}>Booking · Press · Brand Partnerships</p>
