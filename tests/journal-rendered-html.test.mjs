@@ -61,4 +61,12 @@ test("Journal display headings use breathing room between letters", async () => 
     stylesheet,
     /\.journal-empty h1, \.journal-empty h2 \{[^}]*letter-spacing:\s*-.015em;/s,
   );
+  assert.match(
+    stylesheet,
+    /\.journal-feature h2 \{[^}]*letter-spacing:\s*-.015em;/s,
+  );
+  assert.match(
+    stylesheet,
+    /\.journal-entry-header h1 \{[^}]*letter-spacing:\s*-.015em;/s,
+  );
 });

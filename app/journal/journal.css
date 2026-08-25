@@ -36,7 +36,7 @@
 .journal-feature { display: grid; grid-template-columns: minmax(18rem, 37%) 1fr; min-height: 78vh; color: #f2eee5; background: #11110f; }
 .journal-feature-copy { padding: clamp(2rem, 5vw, 5rem) clamp(1rem, 4vw, 4rem); display: flex; flex-direction: column; align-items: flex-start; }
 .journal-kicker { color: #d16f72; font: 700 .66rem/1.2 var(--font-mono), monospace; letter-spacing: .14em; text-transform: uppercase; }
-.journal-feature h2 { margin: auto 0 1.5rem; font-family: var(--font-display), Impact, sans-serif; font-size: clamp(3.2rem, 7vw, 7.4rem); line-height: .85; letter-spacing: -.04em; text-transform: uppercase; text-wrap: balance; }
+.journal-feature h2 { margin: auto 0 1.5rem; font-family: var(--font-display), Impact, sans-serif; font-size: clamp(3.2rem, 7vw, 7.4rem); line-height: .85; letter-spacing: -.015em; text-transform: uppercase; text-wrap: balance; }
 .journal-feature-copy p { max-width: 32rem; margin: 0 0 2rem; color: #bbb5aa; font: 1rem/1.7 Georgia, serif; }
 .journal-feature-copy > a { padding-bottom: .45rem; border-bottom: 1px solid var(--j-red); font: 700 .7rem/1 var(--font-mono), monospace; letter-spacing: .13em; text-transform: uppercase; }
 .journal-feature-media { position: relative; min-height: 55vh; overflow: hidden; background: #282722; }
@@ -72,7 +72,7 @@
 .journal-entry-header { min-height: 74vh; padding: clamp(2rem, 5vw, 5rem) clamp(1rem, 6vw, 7rem) 3rem; display: flex; flex-direction: column; }
 .journal-back { align-self: flex-start; font: 700 .66rem/1 var(--font-mono), monospace; letter-spacing: .12em; text-transform: uppercase; }
 .journal-entry-index { margin-top: auto; display: flex; justify-content: space-between; color: var(--j-red); font: 700 .65rem/1 var(--font-mono), monospace; letter-spacing: .14em; text-transform: uppercase; }
-.journal-entry-header h1 { max-width: 12ch; margin: 1.2rem 0 1.8rem; font: 900 clamp(4rem, 12vw, 12rem)/.78 var(--font-display), Impact, sans-serif; letter-spacing: -.05em; text-transform: uppercase; text-wrap: balance; }
+.journal-entry-header h1 { max-width: 12ch; margin: 1.2rem 0 1.8rem; font: 900 clamp(4rem, 12vw, 12rem)/.78 var(--font-display), Impact, sans-serif; letter-spacing: -.015em; text-transform: uppercase; text-wrap: balance; }
 .journal-entry-header > p { max-width: 42rem; margin: 0 0 2.5rem 24%; font: clamp(1.25rem, 2.2vw, 2rem)/1.35 Georgia, serif; text-wrap: balance; }
 .journal-entry-meta { display: flex; gap: 2rem; padding-top: 1rem; border-top: 1px solid var(--j-ink); font: 700 .65rem/1 var(--font-mono), monospace; letter-spacing: .12em; text-transform: uppercase; }
 .journal-entry-cover { margin: 0; background: #181816; }
