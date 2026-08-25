@@ -44,3 +44,13 @@ test("Journal authoring keeps named stages throughout the editorial workflow", a
   assert.match(blocks, /className="journal-editor-kicker">Story structure<\/p>/);
   assert.match(media, /className="journal-editor-kicker">Visual assets<\/p>/);
 });
+
+test("Journal field pairs share a common top edge", async () => {
+  const stylesheet = await source("../app/admin/admin.css");
+
+  assert.match(
+    stylesheet,
+    /\.journal-editor-section > \.form-field \+ \.form-field, \.journal-editor-section > \.form-grid-2 \+ \.form-field, \.journal-editor-section > \.form-field \+ \.form-grid-2, \.journal-editor-section > \.form-grid-2 \+ \.form-grid-2 \{ margin-top: 1rem; \}/,
+  );
+  assert.doesNotMatch(stylesheet, /\.journal-editor-section \.form-field \+ \.form-field/);
+});
