@@ -386,7 +386,7 @@ export default async function Home() {
               <span>Catalog</span>
             </div>
             <div>
-              <p className="eyebrow">Selected discography · 2018—2026</p>
+              <p className="eyebrow">Selected discography · 2018-2026</p>
               <h2 id="music-title">Built in public.</h2>
             </div>
             <a

@@ -11,7 +11,7 @@ export const metadata: Metadata = {
   },
   openGraph: {
     type: "music.song",
-    title: "JayDubb Tha Ruler — Off Brand (feat. WESTSIDE BOOGIE)",
+    title: "JayDubb Tha Ruler - Off Brand (feat. WESTSIDE BOOGIE)",
     description: "Stream 'Off Brand' on Apple Music, Spotify, and YouTube.",
     url: "https://jaydubbtharuler.com/releases/off-brand",
     siteName: "JayDubb Tha Ruler",
@@ -26,7 +26,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Off Brand (feat. WESTSIDE BOOGIE) — JayDubb Tha Ruler",
+    title: "Off Brand (feat. WESTSIDE BOOGIE) - JayDubb Tha Ruler",
     description: "Acclaimed collaboration between JayDubb Tha Ruler and WESTSIDE BOOGIE.",
     images: ["https://jaydubbtharuler.com/images/jay-dubb/profile-moody.jpg"],
   },
@@ -175,7 +175,7 @@ export default function OffBrandPage() {
             </h2>
             <div className="manifesto-copy">
               <p>
-                Covered extensively by publications like <strong>Westword</strong> and <strong>303 Magazine</strong>, <em>Off Brand</em> marked a defining crossover moment—pairing JayDubb Tha Ruler&apos;s composed flow with Shady Records signee WESTSIDE BOOGIE.
+                Covered extensively by publications like <strong>Westword</strong> and <strong>303 Magazine</strong>, <em>Off Brand</em> marked a defining crossover moment, pairing JayDubb Tha Ruler&apos;s composed flow with Shady Records signee WESTSIDE BOOGIE.
               </p>
               <p>
                 The record urged listeners to celebrate self-worth, reject surface trends, and double down on pure substance.

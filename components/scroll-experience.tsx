@@ -55,76 +55,8 @@ export function ScrollExperience() {
       }
     });
 
-    // 3. Magnetic Hover for Buttons on Pointer Devices
-    const isTouch = "ontouchstart" in window || navigator.maxTouchPoints > 0;
-    const magneticElements = document.querySelectorAll<HTMLElement>(
-      ".button, .contact-email, .header-cta"
-    );
-    const cleanups: Array<() => void> = [];
-
-    if (!isTouch && window.innerWidth > 980) {
-      magneticElements.forEach((el) => {
-        const onMouseMove = (e: MouseEvent) => {
-          const rect = el.getBoundingClientRect();
-          const x = e.clientX - (rect.left + rect.width / 2);
-          const y = e.clientY - (rect.top + rect.height / 2);
-          el.style.transform = `translate3d(${x * 0.15}px, ${y * 0.15}px, 0)`;
-        };
-
-        const onMouseLeave = () => {
-          el.style.transform = "translate3d(0, 0, 0)";
-        };
-
-        el.addEventListener("mousemove", onMouseMove);
-        el.addEventListener("mouseleave", onMouseLeave);
-
-        cleanups.push(() => {
-          el.removeEventListener("mousemove", onMouseMove);
-          el.removeEventListener("mouseleave", onMouseLeave);
-        });
-      });
-    }
-
-    // 4. Parallax zoom-out for .story-logo
-    const storyLogo = document.querySelector<HTMLElement>(".story-logo");
-    const storySection = storyLogo?.closest<HTMLElement>("section");
-    let rafId: number | null = null;
-    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-
-    if (storyLogo && storySection && !prefersReducedMotion) {
-      const SCALE_START = 1.35;
-      const SCALE_END = 1.0;
-      const ROTATION = -5; // preserve the existing rotation
-
-      const onScroll = () => {
-        if (rafId !== null) return;
-        rafId = requestAnimationFrame(() => {
-          rafId = null;
-          const rect = storySection.getBoundingClientRect();
-          const viewH = window.innerHeight;
-
-          // Progress: 0 when section top enters viewport bottom, 1 when section bottom exits viewport top
-          const totalTravel = rect.height + viewH;
-          const traveled = viewH - rect.top;
-          const progress = Math.max(0, Math.min(1, traveled / totalTravel));
-
-          const scale = SCALE_START + (SCALE_END - SCALE_START) * progress;
-          storyLogo.style.transform = `rotate(${ROTATION}deg) scale(${scale})`;
-        });
-      };
-
-      window.addEventListener("scroll", onScroll, { passive: true });
-      onScroll(); // set initial state
-
-      cleanups.push(() => {
-        window.removeEventListener("scroll", onScroll);
-        if (rafId !== null) cancelAnimationFrame(rafId);
-      });
-    }
-
     return () => {
       observer.disconnect();
-      cleanups.forEach((fn) => fn());
     };
   }, []);
 

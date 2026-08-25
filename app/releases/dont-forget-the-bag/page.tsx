@@ -11,7 +11,7 @@ export const metadata: Metadata = {
   },
   openGraph: {
     type: "music.album",
-    title: "JayDubb Tha Ruler — Don't Forget the Bag (Full Album)",
+    title: "JayDubb Tha Ruler - Don't Forget the Bag (Full Album)",
     description: "Stream 'Don't Forget the Bag' on Apple Music, Spotify, and YouTube.",
     url: "https://jaydubbtharuler.com/releases/dont-forget-the-bag",
     siteName: "JayDubb Tha Ruler",
@@ -26,7 +26,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Don't Forget the Bag (Album) — JayDubb Tha Ruler",
+    title: "Don't Forget the Bag (Album) - JayDubb Tha Ruler",
     description: "Full-length 2025 studio album by JayDubb Tha Ruler.",
     images: ["https://jaydubbtharuler.com/images/jay-dubb/city-shirt.jpg"],
   },
@@ -172,7 +172,7 @@ export default function DontForgetTheBagPage() {
             </h2>
             <div className="manifesto-copy">
               <p>
-                Released in 2025, <strong>Don&apos;t Forget the Bag</strong> serves as JayDubb Tha Ruler&apos;s definitive album of the era—chronicling the grind, the business, and the standard required to maintain creative independence.
+                Released in 2025, <strong>Don&apos;t Forget the Bag</strong> serves as JayDubb Tha Ruler&apos;s definitive album of the era, chronicling the grind, the business, and the standard required to maintain creative independence.
               </p>
               <p>
                 From intricate storytelling to anthemic production, the record reinforces why he remains one of Colorado&apos;s most consistent independent forces.

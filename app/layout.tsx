@@ -3,7 +3,7 @@ import { Analytics } from "@vercel/analytics/next";
 import "./globals.css";
 
 export const viewport: Viewport = {
-  themeColor: "#000000",
+  themeColor: "#08090b",
   width: "device-width",
   initialScale: 1,
   maximumScale: 5,
@@ -61,7 +61,7 @@ export const metadata: Metadata = {
         url: "https://jaydubbtharuler.com/og.png",
         width: 1732,
         height: 909,
-        alt: "JayDubb Tha Ruler — Official Artist Website",
+        alt: "JayDubb Tha Ruler - Official Artist Website",
       },
     ],
   },

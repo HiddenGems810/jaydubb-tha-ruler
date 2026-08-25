@@ -11,7 +11,7 @@ export const metadata: Metadata = {
   },
   openGraph: {
     type: "video.other",
-    title: "JayDubb Tha Ruler — Aquarium Floors (Official Music Video)",
+    title: "JayDubb Tha Ruler - Aquarium Floors (Official Music Video)",
     description:
       "Stream and watch 'Aquarium Floors' by JayDubb Tha Ruler. Official video, track details, and streaming platforms.",
     url: "https://jaydubbtharuler.com/releases/aquarium-floors",
@@ -27,7 +27,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "JayDubb Tha Ruler — Aquarium Floors (Official Video)",
+    title: "JayDubb Tha Ruler - Aquarium Floors (Official Video)",
     description: "Watch the official video for Aquarium Floors by JayDubb Tha Ruler.",
     images: ["https://jaydubbtharuler.com/images/jay-dubb/live-wide.jpg"],
   },

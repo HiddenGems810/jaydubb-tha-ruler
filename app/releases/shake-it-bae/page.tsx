@@ -11,7 +11,7 @@ export const metadata: Metadata = {
   },
   openGraph: {
     type: "music.song",
-    title: "JayDubb Tha Ruler — Shake It Bae (feat. LLzMusik)",
+    title: "JayDubb Tha Ruler - Shake It Bae (feat. LLzMusik)",
     description: "Stream 'Shake It Bae' on Apple Music, Spotify, and YouTube.",
     url: "https://jaydubbtharuler.com/releases/shake-it-bae",
     siteName: "JayDubb Tha Ruler",
@@ -26,7 +26,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Shake It Bae (feat. LLzMusik) — JayDubb Tha Ruler",
+    title: "Shake It Bae (feat. LLzMusik) - JayDubb Tha Ruler",
     description: "New 2026 single from Colorado rap artist JayDubb Tha Ruler.",
     images: ["https://jaydubbtharuler.com/images/jay-dubb/blue-hands.jpg"],
   },
@@ -175,7 +175,7 @@ export default function ShakeItBaePage() {
             </h2>
             <div className="manifesto-copy">
               <p>
-                Teaming up with LLzMusik, <strong>Shake It Bae</strong> showcases JayDubb Tha Ruler&apos;s versatility—seamlessly transitioning between heavy street narrative and infectious club energy without diluting lyricism.
+                Teaming up with LLzMusik, <strong>Shake It Bae</strong> showcases JayDubb Tha Ruler&apos;s versatility, seamlessly transitioning between heavy street narrative and infectious club energy without diluting lyricism.
               </p>
               <p>
                 Representing the ongoing evolution of the independent Colorado rap movement, the single kicks off his 2026 release schedule with unmistakable momentum.
