@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import { getAllPublishedShows } from "@/lib/supabase/queries";
+import { getAllPublishedShows, getPublishedReleases } from "@/lib/supabase/queries";
 import { ShowsSection } from "@/components/shows-section";
 import { VipForm } from "@/components/vip-form";
 import { BookingForm } from "@/components/booking-form";
@@ -9,64 +9,7 @@ import { getLatestJournalEntry } from "@/lib/journal/queries";
 
 export const revalidate = 60;
 
-const releases = [
-  {
-    year: "2026",
-    title: "Shake It Bae",
-    detail: "Single · feat. LLzMusik",
-    href: "https://music.apple.com/us/album/shake-it-bae-feat-llzmusik-single/1877512143",
-    slug: "/releases/shake-it-bae",
-    hasPage: true,
-  },
-  {
-    year: "2025",
-    title: "Don't Forget the Bag",
-    detail: "Studio Album",
-    href: "https://music.apple.com/us/album/dont-forget-the-bag/1820728789",
-    slug: "/releases/dont-forget-the-bag",
-    hasPage: true,
-  },
-  {
-    year: "2025",
-    title: "Plain Jane",
-    detail: "Single",
-    href: "https://music.apple.com/us/album/plain-jane-single/1824313063",
-    slug: null,
-    hasPage: false,
-  },
-  {
-    year: "2025",
-    title: "Wyd",
-    detail: "Single",
-    href: "https://music.apple.com/us/album/wyd-single/1794084583",
-    slug: null,
-    hasPage: false,
-  },
-  {
-    year: "2024",
-    title: "Did It My Way",
-    detail: "Single · feat. Skeme",
-    href: "https://music.apple.com/in/album/did-it-my-way-feat-skeme-single/1768614095",
-    slug: null,
-    hasPage: false,
-  },
-  {
-    year: "2023",
-    title: "Get Back to It",
-    detail: "EP",
-    href: "https://music.apple.com/ng/album/get-back-to-it-ep/1694204547",
-    slug: null,
-    hasPage: false,
-  },
-  {
-    year: "2022",
-    title: "Off Brand",
-    detail: "Single · feat. Westside Boogie",
-    href: "https://music.apple.com/za/album/off-brand-single-feat-westside-boogie-single/1617966879",
-    slug: "/releases/off-brand",
-    hasPage: true,
-  },
-];
+
 
 const press = [
   {
@@ -211,13 +154,49 @@ function Arrow() {
 }
 
 export default async function Home() {
-  const [shows, latestJournalEntry] = await Promise.all([
+  const [shows, latestJournalEntry, dbReleases] = await Promise.all([
     getAllPublishedShows(),
     getLatestJournalEntry().catch((error) => {
       console.error("Failed to load the latest journal entry:", error);
       return null;
     }),
+    getPublishedReleases().catch((error) => {
+      console.error("Failed to load releases:", error);
+      return [];
+    }),
   ]);
+  // Map DB releases to the shape the template expects
+  const releases = dbReleases.map((r) => ({
+    year: new Date(r.release_date).getFullYear().toString(),
+    title: r.title,
+    detail: r.release_type.charAt(0).toUpperCase() + r.release_type.slice(1),
+    href: r.spotify_url ?? r.apple_music_url ?? r.youtube_url ?? r.audiomack_url ?? "#",
+    slug: `/releases/${r.slug}`,
+    hasPage: true,
+  }));
+  // Featured release: prefer is_featured flag, else first by display_order (admin controls both)
+  const featuredRaw = dbReleases.find((r) => r.is_featured) ?? dbReleases[0] ?? null;
+  const featured = featuredRaw
+    ? {
+        title: featuredRaw.title,
+        slug: `/releases/${featuredRaw.slug}`,
+        year: new Date(featuredRaw.release_date).getFullYear().toString(),
+        detail: featuredRaw.release_type.charAt(0).toUpperCase() + featuredRaw.release_type.slice(1),
+        streamHref:
+          featuredRaw.spotify_url ??
+          featuredRaw.apple_music_url ??
+          featuredRaw.youtube_url ??
+          featuredRaw.audiomack_url ??
+          "#",
+        streamLabel: featuredRaw.spotify_url
+          ? "Play on Spotify"
+          : featuredRaw.apple_music_url
+          ? "Play on Apple Music"
+          : featuredRaw.youtube_url
+          ? "Watch on YouTube"
+          : "Play Record",
+      }
+    : null;
   return (
     <>
       <ScrollExperience />
@@ -282,16 +261,18 @@ export default async function Home() {
               Never off brand.
             </p>
             <div className="hero-actions" aria-label="Primary actions">
-              <a
-                className="button button-primary"
-                href="https://music.apple.com/us/album/shake-it-bae-feat-llzmusik-single/1877512143"
-                target="_blank"
-                rel="noreferrer"
-                data-fan-event="stream_latest"
-                data-platform="apple_music"
-              >
-                Listen Now <Arrow />
-              </a>
+              {featured ? (
+                <a
+                  className="button button-primary"
+                  href={featured.streamHref}
+                  target="_blank"
+                  rel="noreferrer"
+                  data-fan-event="stream_latest"
+                  data-release={featured.title}
+                >
+                  Listen Now <Arrow />
+                </a>
+              ) : null}
               <a
                 className="button button-ghost"
                 href="#video"
@@ -318,29 +299,32 @@ export default async function Home() {
           </p>
         </section>
 
-        <aside className="release-strip" aria-label="Latest release banner">
-          <span>Now streaming</span>
-          <strong>Shake It Bae</strong>
-          <span>feat. LLzMusik · 2026</span>
-          <div className="release-strip-links">
-            <Link
-              href="/releases/shake-it-bae"
-              className="release-strip-btn"
-              data-fan-event="view_release_page"
-            >
-              Release Details <Arrow />
-            </Link>
-            <a
-              href="https://music.apple.com/us/album/shake-it-bae-feat-llzmusik-single/1877512143"
-              target="_blank"
-              rel="noreferrer"
-              data-fan-event="stream_latest"
-              data-platform="apple_music"
-            >
-              Play Record <Arrow />
-            </a>
-          </div>
-        </aside>
+        {featured && (
+          <aside className="release-strip" aria-label="Latest release banner">
+            <span>Now streaming</span>
+            <strong>{featured.title}</strong>
+            <span>{featured.detail} · {featured.year}</span>
+            <div className="release-strip-links">
+              <Link
+                href={featured.slug}
+                className="release-strip-btn"
+                data-fan-event="view_release_page"
+                data-release={featured.title}
+              >
+                Release Details <Arrow />
+              </Link>
+              <a
+                href={featured.streamHref}
+                target="_blank"
+                rel="noreferrer"
+                data-fan-event="stream_latest"
+                data-release={featured.title}
+              >
+                {featured.streamLabel} <Arrow />
+              </a>
+            </div>
+          </aside>
+        )}
 
         <section className="manifesto section-paper" aria-labelledby="manifesto-title">
           <div className="section-marker">

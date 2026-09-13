@@ -1,0 +1,220 @@
+import type { Metadata } from "next";
+import { notFound } from "next/navigation";
+import Image from "next/image";
+import Link from "next/link";
+import { getPublishedReleaseBySlug } from "@/lib/supabase/queries";
+
+export const revalidate = 60;
+
+type Props = {
+  params: Promise<{ slug: string }>;
+};
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { slug } = await params;
+  const { release } = await getPublishedReleaseBySlug(slug);
+
+  if (!release) {
+    return { title: "Release Not Found | JayDubb Tha Ruler" };
+  }
+
+  const year = new Date(release.release_date).getFullYear();
+  const typeLabel =
+    release.release_type.charAt(0).toUpperCase() + release.release_type.slice(1);
+
+  return {
+    title: `${release.title} (${typeLabel} ${year}) | JayDubb Tha Ruler`,
+    description:
+      release.description ??
+      `Listen to "${release.title}" by Colorado Springs hip-hop artist JayDubb Tha Ruler. Streaming links and release details.`,
+    alternates: {
+      canonical: `https://jaydubbtharuler.com/releases/${release.slug}`,
+    },
+    openGraph: {
+      type: "music.song",
+      title: `JayDubb Tha Ruler - ${release.title}`,
+      description:
+        release.description ??
+        `Stream "${release.title}" on Spotify, Apple Music, and more.`,
+      url: `https://jaydubbtharuler.com/releases/${release.slug}`,
+      siteName: "JayDubb Tha Ruler",
+      images: [
+        {
+          url: release.artwork_url,
+          width: 1200,
+          height: 1200,
+          alt: `${release.title} - JayDubb Tha Ruler`,
+        },
+      ],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: `${release.title} - JayDubb Tha Ruler`,
+      description: release.description ?? `New release from JayDubb Tha Ruler.`,
+      images: [release.artwork_url],
+    },
+  };
+}
+
+function Arrow() {
+  return <span aria-hidden="true">↗</span>;
+}
+
+export default async function DynamicReleasePage({ params }: Props) {
+  const { slug } = await params;
+  const { release } = await getPublishedReleaseBySlug(slug);
+
+  if (!release) {
+    notFound();
+  }
+
+  const year = new Date(release.release_date).getFullYear();
+  const typeLabel =
+    release.release_type.charAt(0).toUpperCase() + release.release_type.slice(1);
+
+  const streamLinks = [
+    { label: "Spotify", href: release.spotify_url },
+    { label: "Apple Music", href: release.apple_music_url },
+    { label: "YouTube", href: release.youtube_url },
+    { label: "Audiomack", href: release.audiomack_url },
+    { label: "Amazon Music", href: release.amazon_music_url },
+  ].filter((l): l is { label: string; href: string } => Boolean(l.href));
+
+  const releaseSchema = {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "MusicRecording",
+        name: release.title,
+        datePublished: String(year),
+        byArtist: {
+          "@type": "MusicGroup",
+          name: "JayDubb Tha Ruler",
+          url: "https://jaydubbtharuler.com",
+        },
+        genre: "Hip-Hop/Rap",
+        url: `https://jaydubbtharuler.com/releases/${release.slug}`,
+      },
+      {
+        "@type": "BreadcrumbList",
+        itemListElement: [
+          { "@type": "ListItem", position: 1, name: "Home", item: "https://jaydubbtharuler.com" },
+          { "@type": "ListItem", position: 2, name: "Catalog", item: "https://jaydubbtharuler.com/#music" },
+          { "@type": "ListItem", position: 3, name: release.title, item: `https://jaydubbtharuler.com/releases/${release.slug}` },
+        ],
+      },
+    ],
+  };
+
+  return (
+    <>
+      <a className="skip-link" href="#main">Skip to content</a>
+
+      <header className="site-header">
+        <Link className="brand" href="/" aria-label="JayDubb Tha Ruler home">
+          <Image src="/images/brand/main-white-logo.webp" alt="JayDubb Tha Ruler" width={420} height={172} priority unoptimized />
+        </Link>
+        <nav aria-label="Primary navigation">
+          <Link href="/#music">Music</Link>
+          <Link href="/#video">Video</Link>
+          <Link href="/#story">Story</Link>
+          <Link href="/#live">Live</Link>
+          <Link href="/#contact">Contact</Link>
+        </nav>
+        <a className="header-cta" href="mailto:booking@jaydubbtharuler.com">Book JayDubb <Arrow /></a>
+      </header>
+
+      <main id="main" className="release-page">
+        <section className="release-hero section-dark" aria-labelledby="release-title">
+          <div className="release-hero-content">
+            <nav className="breadcrumbs" aria-label="Breadcrumbs">
+              <Link href="/">Home</Link>
+              <span aria-hidden="true">/</span>
+              <Link href="/#music">Catalog</Link>
+              <span aria-hidden="true">/</span>
+              <span aria-current="page">{release.title}</span>
+            </nav>
+            <p className="eyebrow">{typeLabel} · {year}</p>
+            <h1 id="release-title">{release.title}</h1>
+            {release.description && <p className="hero-deck">{release.description}</p>}
+            {streamLinks.length > 0 && (
+              <div className="hero-actions">
+                {streamLinks.map((link, i) => (
+                  <a
+                    key={link.label}
+                    className={i === 0 ? "button button-primary" : "button button-ghost"}
+                    href={link.href}
+                    target="_blank"
+                    rel="noreferrer"
+                    data-fan-event="stream_platform"
+                    data-platform={link.label.toLowerCase().replace(/\s+/g, "_")}
+                  >
+                    {link.label} <Arrow />
+                  </a>
+                ))}
+              </div>
+            )}
+          </div>
+        </section>
+
+        <section className="manifesto section-paper" aria-labelledby="details-heading">
+          <div className="section-marker">
+            <span>01</span>
+            <span>Release</span>
+          </div>
+          <div className="manifesto-grid">
+            <h2 id="details-heading">
+              {release.title}<br /><span>by JayDubb Tha Ruler.</span>
+            </h2>
+            <div className="manifesto-copy">
+              {release.description && <p>{release.description}</p>}
+              <div className="release-meta-table">
+                <div><span>Artist</span><strong>JayDubb Tha Ruler</strong></div>
+                <div><span>Type</span><strong>{typeLabel}</strong></div>
+                <div><span>Year</span><strong>{year}</strong></div>
+                <div><span>Label</span><strong>The 7 / Independent</strong></div>
+              </div>
+            </div>
+            <figure className="manifesto-photo">
+              <Image src={release.artwork_url} alt={`${release.title} artwork`} fill unoptimized sizes="(max-width: 700px) 88vw, 31vw" />
+            </figure>
+          </div>
+        </section>
+
+        <section className="contact-section" id="booking" aria-labelledby="booking-heading">
+          <div className="contact-copy">
+            <p className="eyebrow">Inquiries · Shows · Press</p>
+            <h2 id="booking-heading">Book JayDubb Tha Ruler</h2>
+            <p>For festival bookings, venue dates, media coverage, and feature inquiries.</p>
+            <a className="contact-email" href="mailto:booking@jaydubbtharuler.com?subject=Booking%20Inquiry%20-%20JayDubb%20Tha%20Ruler" data-fan-event="booking_inquiry">
+              booking@jaydubbtharuler.com <Arrow />
+            </a>
+          </div>
+        </section>
+      </main>
+
+      <footer>
+        <div className="footer-logo">
+          <Image src="/images/brand/main-white-logo.webp" alt="JayDubb Tha Ruler" width={980} height={400} unoptimized />
+        </div>
+        <div className="footer-grid">
+          <p className="footer-origin">Colorado Springs, CO</p>
+          <nav aria-label="Social links" className="footer-nav">
+            <a href="https://open.spotify.com/artist/7IlXxo9gPXLZz2oWpTwS4l" target="_blank" rel="noreferrer">Spotify</a>
+            <a href="https://music.apple.com/us/artist/jaydubbtharuler/1439373897" target="_blank" rel="noreferrer">Apple Music</a>
+            <a href="https://www.youtube.com/@jaydubbtharuler" target="_blank" rel="noreferrer">YouTube</a>
+            <a href="https://www.instagram.com/jaydubbtharuler/" target="_blank" rel="noreferrer">Instagram</a>
+            <a href="https://x.com/JayDubbThaRuler" target="_blank" rel="noreferrer">X</a>
+          </nav>
+          <p className="footer-brand-tag">The 7 · Independent</p>
+        </div>
+        <div className="footer-bottom-bar">
+          <p>© {new Date().getFullYear()} JayDubb Tha Ruler</p>
+          <p className="footer-designer">Website Designed &amp; Developed by{" "}<a href="https://gerquiaabner.com" target="_blank" rel="noreferrer">Ger&apos;Quia Abner <Arrow /></a></p>
+        </div>
+      </footer>
+
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(releaseSchema) }} />
+    </>
+  );
+}
