@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Analytics } from "@vercel/analytics/next";
+import { FanActionDock } from "@/components/fan-action-dock";
 import "./globals.css";
 
 export const viewport: Viewport = {
@@ -96,6 +97,7 @@ export default function RootLayout({
       </head>
       <body>
         {children}
+        <FanActionDock />
         <script
           dangerouslySetInnerHTML={{
             __html: `

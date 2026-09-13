@@ -42,6 +42,19 @@ test("server-renders the JayDubb artist hub", async () => {
   assert.doesNotMatch(html, /codex-preview|react-loading-skeleton/i);
 });
 
+test("server-renders the professional EPK", async () => {
+  const response = await render("/epk");
+  assert.equal(response.status, 200);
+  const html = await response.text();
+
+  assert.match(html, /Electronic Press Kit/i);
+  assert.match(html, /Short Bio/i);
+  assert.match(html, /Extended Bio/i);
+  assert.match(html, /booking@jaydubbtharuler\.com/i);
+  assert.match(html, /https:\/\/jaydubbtharuler\.com\/#artist/);
+  assert.match(html, /jaydubb-blue-hands\.jpg/);
+});
+
 test("server-renders the Aquarium Floors release page", async () => {
   const response = await render("/releases/aquarium-floors");
   assert.equal(response.status, 200);

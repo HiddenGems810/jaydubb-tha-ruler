@@ -1,6 +1,8 @@
 import { cache } from "react";
+import { createClient as createSupabaseClient } from "@supabase/supabase-js";
 import { createClient } from "@/lib/supabase/server";
-import type { Tables } from "@/types/database";
+import { getSupabasePublicEnv } from "@/lib/supabase/env";
+import type { Database, Tables } from "@/types/database";
 
 export type JournalEntryRow = Tables<"journal_entries">;
 export type JournalMediaRow = Tables<"journal_media">;
@@ -9,6 +11,16 @@ export type JournalEntryWithMedia = JournalEntryRow & { media: JournalMediaRow[]
 const publicEntryColumns = "id,entry_number,slug,title,excerpt,entry_type,content,event_date,location,published_at,featured_at,cover_media_id,og_media_id,seo_title,seo_description,created_at,updated_at";
 const adminEntryColumns = "id,entry_number,slug,title,excerpt,entry_type,content,event_date,location,published_at,featured_at,cover_media_id,og_media_id,seo_title,seo_description,created_at,updated_at,status,created_by,updated_by";
 const mediaColumns = "id,entry_id,storage_path,kind,mime_type,width,height,file_size_bytes,blur_data_url,alt_text,caption,credit,sort_order,created_at,updated_at";
+
+export function getPublicJournalClient() {
+  const { url, anonKey } = getSupabasePublicEnv();
+  return createSupabaseClient<Database>(url, anonKey, {
+    auth: {
+      persistSession: false,
+      autoRefreshToken: false,
+    },
+  });
+}
 
 function isMissingJournalSchema(error: { code?: string; message?: string } | null) {
   return Boolean(error && (
@@ -19,7 +31,7 @@ function isMissingJournalSchema(error: { code?: string; message?: string } | nul
 
 async function attachMedia(entries: JournalEntryRow[]) {
   if (entries.length === 0) return [];
-  const supabase = await createClient();
+  const supabase = getPublicJournalClient();
   const { data, error } = await supabase
     .from("journal_media")
     .select(mediaColumns)
@@ -37,7 +49,7 @@ async function attachMedia(entries: JournalEntryRow[]) {
 }
 
 export async function getJournalIndexPage(limit = 48): Promise<JournalEntryWithMedia[]> {
-  const supabase = await createClient();
+  const supabase = getPublicJournalClient();
   const { data, error } = await supabase
     .from("journal_entries")
     .select(publicEntryColumns)
@@ -51,7 +63,7 @@ export async function getJournalIndexPage(limit = 48): Promise<JournalEntryWithM
 }
 
 export const getPublishedJournalEntryBySlug = cache(async (slug: string) => {
-  const supabase = await createClient();
+  const supabase = getPublicJournalClient();
   const { data, error } = await supabase
     .from("journal_entries")
     .select(publicEntryColumns)
@@ -65,7 +77,7 @@ export const getPublishedJournalEntryBySlug = cache(async (slug: string) => {
 });
 
 export async function getAdjacentPublishedEntries(entry: JournalEntryRow) {
-  const supabase = await createClient();
+  const supabase = getPublicJournalClient();
   const [newerResult, olderResult] = await Promise.all([
     supabase.from("journal_entries").select("slug,title,published_at,entry_number")
       .gt("published_at", entry.published_at ?? "")
@@ -86,7 +98,7 @@ export async function getLatestJournalEntry() {
 }
 
 export async function getJournalSitemapEntries() {
-  const supabase = await createClient();
+  const supabase = getPublicJournalClient();
   const { data, error } = await supabase.from("journal_entries")
     .select("slug,updated_at,published_at").order("published_at", { ascending: false });
   if (isMissingJournalSchema(error)) return [];
@@ -95,7 +107,7 @@ export async function getJournalSitemapEntries() {
 }
 
 export async function getJournalRssEntries() {
-  const supabase = await createClient();
+  const supabase = getPublicJournalClient();
   const { data, error } = await supabase.from("journal_entries")
     .select("slug,title,excerpt,published_at,updated_at")
     .order("published_at", { ascending: false }).limit(50);

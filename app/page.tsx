@@ -213,7 +213,10 @@ function Arrow() {
 export default async function Home() {
   const [shows, latestJournalEntry] = await Promise.all([
     getAllPublishedShows(),
-    getLatestJournalEntry(),
+    getLatestJournalEntry().catch((error) => {
+      console.error("Failed to load the latest journal entry:", error);
+      return null;
+    }),
   ]);
   return (
     <>
@@ -296,16 +299,14 @@ export default async function Home() {
               >
                 Watch Video
               </a>
-              <a
+              <Link
                 className="button button-ghost"
-                href="https://www.the7even.co/"
-                target="_blank"
-                rel="noreferrer"
+                href="/shop"
                 data-fan-event="shop_merch"
                 data-platform="the7"
               >
                 Shop The 7 <Arrow />
-              </a>
+              </Link>
             </div>
           </div>
           <div className="hero-index" aria-hidden="true">
@@ -629,6 +630,9 @@ export default async function Home() {
               <p className="eyebrow">Selected press</p>
               <h2 id="press-title">On record.</h2>
             </div>
+            <Link href="/epk" className="text-link" data-fan-event="epk_open">
+              View EPK <Arrow />
+            </Link>
           </div>
           <ul className="press-list">
             {press.map((item) => (
@@ -670,16 +674,14 @@ export default async function Home() {
               The music and the merchandise move together. Shop the official
               artist-led apparel and streetwear at The 7.
             </p>
-            <a
+            <Link
               className="button button-primary"
-              href="https://www.the7even.co/"
-              target="_blank"
-              rel="noreferrer"
+              href="/shop"
               data-fan-event="shop_merch"
               data-platform="the7"
             >
               Shop The 7 <Arrow />
-            </a>
+            </Link>
           </div>
         </section>
 
@@ -757,7 +759,10 @@ export default async function Home() {
         </div>
         <div className="footer-grid">
           <p className="footer-origin">Colorado Springs, CO</p>
-          <nav aria-label="Social links" className="footer-nav">
+          <nav aria-label="Artist links" className="footer-nav">
+            <Link href="/epk" data-fan-event="epk_open">
+              EPK
+            </Link>
             {socials.map(([label, href]) => (
               <a
                 key={label}

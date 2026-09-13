@@ -49,7 +49,6 @@
   /* Awwwards-grade custom easing functions (/top-design) */
   --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
   --ease-out-quart: cubic-bezier(0.25, 1, 0.5, 1);
-  --ease-out-back: cubic-bezier(0.34, 1.56, 0.64, 1);
   --ease-in-out-expo: cubic-bezier(0.87, 0, 0.13, 1);
 }
 
@@ -160,16 +159,19 @@ body::selection {
   margin: 1rem 0;
   font-family: var(--font-display), Impact, sans-serif;
   font-size: clamp(3.5rem, 9vw, 9rem);
-  line-height: .82;
-  letter-spacing: -.045em;
+  font-weight: 400;
+  line-height: .96;
+  letter-spacing: -.03em;
   text-transform: uppercase;
   text-wrap: balance;
 }
 
 .home-journal-grid > div > p:last-child {
   max-width: 38rem;
-  font-family: Georgia, serif;
+  font-family: var(--font-body), -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: clamp(1rem, 1.2vw, 1.15rem);
   line-height: 1.65;
+  color: #3a3935;
 }
 
 .home-journal-actions {
@@ -344,7 +346,7 @@ img {
   font-family: var(--font-display), Impact, sans-serif;
   font-weight: 400;
   letter-spacing: -0.03em;
-  line-height: 0.84;
+  line-height: 0.94;
   text-transform: uppercase;
 }
 
@@ -352,7 +354,7 @@ img {
   max-width: 8.6ch;
   margin: 0;
   font-size: clamp(6rem, 14.5vw, 14.5rem);
-  line-height: 0.88;
+  line-height: 0.94;
   letter-spacing: -0.035em;
 }
 
@@ -579,6 +581,7 @@ img {
 
 .manifesto-photo img {
   object-fit: cover;
+  object-position: 50% top;
 }
 
 .music-index,
@@ -617,12 +620,11 @@ img {
   align-items: center;
   min-height: 7.75rem;
   padding: 1rem 0;
-  transition: color 160ms ease, padding 160ms ease;
+  transition: color 160ms ease, background-color 160ms ease;
 }
 
 .release-list a:hover,
 .release-list a:focus-visible {
-  padding-inline: 1rem;
   background: var(--red);
   color: var(--paper);
 }
@@ -935,7 +937,7 @@ img {
   margin: 0;
   font-family: var(--font-display), Impact, sans-serif;
   font-size: clamp(7rem, 16vw, 16rem);
-  line-height: 0.85;
+  line-height: 0.94;
   color: var(--red);
   letter-spacing: -0.02em;
   text-transform: uppercase;
@@ -2070,9 +2072,19 @@ footer {
   *::before,
   *::after {
     scroll-behavior: auto !important;
-    transition-duration: 0.01ms !important;
-    animation: none !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
   }
+}
+
+.vip-input-wrap input.sr-only {
+  width: 1px;
+  height: 1px;
+  min-height: 0;
+  max-width: 1px;
+  padding: 0;
+  border: 0;
+  flex: none;
 }
 
 /* Shows & Tour Section */
@@ -2105,7 +2117,59 @@ footer {
 }
 
 .show-card.show-featured {
-  border-left: 4px solid var(--accent);
+  border-color: rgba(193, 18, 31, 0.72);
+}
+
+.show-action {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 0.85rem;
+  min-width: 11.5rem;
+}
+
+.show-utilities {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.55rem;
+  color: #d7d7d1;
+  font-family: var(--font-mono), monospace;
+  font-size: 0.62rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.show-utilities a,
+.show-utilities button {
+  min-height: 2.75rem;
+  padding: 0.35rem 0;
+  border: 0;
+  border-bottom: 1px solid transparent;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  letter-spacing: inherit;
+  text-transform: inherit;
+  cursor: pointer;
+  transition: color 160ms ease, border-color 160ms ease;
+}
+
+.show-utilities a:hover,
+.show-utilities a:focus-visible,
+.show-utilities button:hover,
+.show-utilities button:focus-visible {
+  border-color: var(--red);
+  color: #ffffff;
+}
+
+.show-share-status {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
 }
 
 .show-date-badge {
@@ -2362,6 +2426,11 @@ footer {
     gap: 1.25rem;
   }
 
+  .show-action {
+    align-items: stretch;
+    min-width: 0;
+  }
+
   .show-date-badge {
     flex-direction: row;
     gap: 0.75rem;
@@ -2371,6 +2440,89 @@ footer {
 
   .form-row {
     grid-template-columns: 1fr;
+  }
+}
+
+/* Global fan utility dock */
+.fan-action-dock {
+  position: fixed;
+  z-index: 90;
+  right: 50%;
+  bottom: calc(0.75rem + env(safe-area-inset-bottom));
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  width: min(42rem, calc(100vw - 2rem));
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  background: rgba(8, 9, 11, 0.96);
+  box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.42);
+  opacity: 0;
+  pointer-events: none;
+  transform: translate3d(50%, 0.5rem, 0);
+  transition: opacity 160ms ease-in, transform 160ms ease-in;
+}
+
+.fan-action-dock-visible {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translate3d(50%, 0, 0);
+  transition-duration: 200ms;
+  transition-timing-function: var(--ease-out-expo);
+}
+
+.fan-action-dock a {
+  display: flex;
+  min-height: 3rem;
+  align-items: center;
+  justify-content: center;
+  border-right: 1px solid rgba(255, 255, 255, 0.16);
+  color: var(--paper);
+  font-family: var(--font-mono), monospace;
+  font-size: 0.68rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  transition: background-color 160ms ease, color 160ms ease;
+}
+
+.fan-action-dock a:first-child {
+  background: var(--red);
+  color: #ffffff;
+}
+
+.fan-action-dock a:last-child {
+  border-right: 0;
+}
+
+.fan-action-dock a:hover,
+.fan-action-dock a:focus-visible {
+  background: var(--paper);
+  color: var(--ink);
+}
+
+@media (max-width: 560px) {
+  .fan-action-dock {
+    bottom: 0;
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+    width: 100%;
+    border-right: 0;
+    border-bottom: 0;
+    border-left: 0;
+  }
+
+  .fan-action-dock a {
+    min-height: 3.25rem;
+    font-size: 0.59rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fan-action-dock,
+  .fan-action-dock-visible {
+    transform: translate3d(50%, 0, 0);
+    transition: opacity 150ms ease;
+  }
+
+  .show-card:hover {
+    transform: none;
   }
 }
 

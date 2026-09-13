@@ -12,10 +12,12 @@ export function JournalMedia({ media, priority = false, className = "", mediaBas
   if (media.kind === "video") {
     return <video className={className} controls preload="metadata" playsInline aria-label={media.alt_text ?? "Journal video"}><source src={`${mediaBasePath}/${media.id}`} type={media.mime_type} /></video>;
   }
+  const filename = media.storage_path ? media.storage_path.split("/").pop() : null;
+  const imageSrc = filename ? `/images/jay-dubb/${filename}` : `${mediaBasePath}/${media.id}`;
   return (
     <Image
       className={className}
-      src={`${mediaBasePath}/${media.id}`}
+      src={imageSrc}
       alt={media.alt_text ?? ""}
       width={width}
       height={height}

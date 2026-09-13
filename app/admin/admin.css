@@ -585,9 +585,9 @@
 .journal-editor-search { max-width: 54rem; background: #0d0e11; }
 .journal-editor-heading { margin-bottom: clamp(1.5rem, 3vw, 2.5rem); padding-bottom: 1rem; display: flex; justify-content: space-between; align-items: flex-end; gap: 1rem; border-bottom: 1px solid #25262c; }
 .journal-editor-heading > div:first-child { min-width: 0; }
-.journal-editor-kicker { margin: 0 0 .55rem; color: #c1121f; font: 700 .66rem/1 var(--font-mono), monospace; letter-spacing: .1em; text-transform: uppercase; }
-.journal-editor-heading h2 { margin: 0; font: 900 clamp(1.8rem, 3vw, 2.8rem)/.94 var(--font-display), Impact, sans-serif; letter-spacing: .01em; text-transform: uppercase; }
-.journal-title-input { min-height: 4.5rem; font: 900 clamp(1.8rem, 3vw, 3.35rem)/1 var(--font-display), Impact, sans-serif; letter-spacing: .015em; text-transform: uppercase; }
+.journal-editor-kicker { margin: 0 0 .55rem; color: #c1121f; font: 500 .66rem/1 var(--font-mono), monospace; letter-spacing: .1em; text-transform: uppercase; }
+.journal-editor-heading h2 { margin: 0; font: 400 clamp(1.8rem, 3vw, 2.8rem)/.94 var(--font-display), Impact, sans-serif; letter-spacing: .01em; text-transform: uppercase; }
+.journal-title-input { min-height: 4.5rem; font: 400 clamp(1.8rem, 3vw, 3.35rem)/1 var(--font-display), Impact, sans-serif; letter-spacing: .015em; text-transform: uppercase; }
 .journal-editor-section > .form-field + .form-field, .journal-editor-section > .form-grid-2 + .form-field, .journal-editor-section > .form-field + .form-grid-2, .journal-editor-section > .form-grid-2 + .form-grid-2 { margin-top: 1rem; }
 .journal-editor-help { max-width: 42rem; margin: -1.5rem 0 clamp(2rem, 4vw, 4rem); color: #b4b5b0; font-size: .9rem; line-height: 1.6; }
 .journal-block-add { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: .35rem; }

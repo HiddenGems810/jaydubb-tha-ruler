@@ -7,7 +7,7 @@
   min-height: 100vh;
   color: var(--j-ink);
   background: var(--j-paper);
-  font-family: var(--font-body), "Arial Narrow", sans-serif;
+  font-family: var(--font-body), -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
 }
 
 .journal-site ::selection { background: var(--j-red); color: #faf8f2; }
@@ -21,34 +21,34 @@
   color: #faf8f2; background: #0d0d0c; border-bottom: 1px solid #33322f;
 }
 .journal-brand img { display: block; width: 9rem; height: auto; }
-.journal-header nav { display: flex; align-items: center; gap: clamp(1rem, 3vw, 2.75rem); font: 700 .68rem/1 var(--font-mono), monospace; letter-spacing: .13em; text-transform: uppercase; }
+.journal-header nav { display: flex; align-items: center; gap: clamp(1rem, 3vw, 2.75rem); font: 500 .68rem/1 var(--font-mono), monospace; letter-spacing: .13em; text-transform: uppercase; }
 .journal-header nav a { position: relative; padding: .6rem 0; color: #b8b4ab; transition: color 280ms cubic-bezier(.16,1,.3,1); }
 .journal-header nav a:hover, .journal-header nav a[aria-current="page"] { color: #faf8f2; }
 .journal-header nav a[aria-current="page"]::after { content: ""; position: absolute; right: 0; bottom: 0; left: 0; height: 2px; background: var(--j-red); }
 
 .journal-masthead { min-height: 72vh; padding: clamp(2rem, 5vw, 5rem) clamp(1rem, 3vw, 3rem) 2rem; display: flex; flex-direction: column; justify-content: space-between; overflow: hidden; border-bottom: 1px solid var(--j-ink); }
-.journal-masthead-top, .journal-rule { display: flex; justify-content: space-between; font: 700 .65rem/1.2 var(--font-mono), monospace; letter-spacing: .16em; text-transform: uppercase; }
-.journal-masthead h1 { margin: auto 0 0; font-family: var(--font-display), Impact, sans-serif; font-size: clamp(5.4rem, 18vw, 17rem); font-weight: 900; line-height: .72; letter-spacing: -.015em; text-transform: uppercase; white-space: nowrap; animation: journal-title 900ms cubic-bezier(.16,1,.3,1) both; }
+.journal-masthead-top, .journal-rule { display: flex; justify-content: space-between; font: 500 .68rem/1.2 var(--font-mono), monospace; letter-spacing: .16em; text-transform: uppercase; }
+.journal-masthead h1 { margin: auto 0 0; font-family: var(--font-display), Impact, sans-serif; font-size: clamp(5.4rem, 18vw, 17rem); font-weight: 400; line-height: .88; letter-spacing: -.015em; text-transform: uppercase; white-space: nowrap; animation: journal-title 900ms cubic-bezier(.16,1,.3,1) both; }
 .journal-masthead h1 span { color: transparent; -webkit-text-stroke: clamp(1px, .12vw, 3px) var(--j-ink); }
-.journal-masthead > p { max-width: 35rem; margin: clamp(2rem, 5vw, 4rem) 0 3rem 27%; font-family: Georgia, serif; font-size: clamp(1.4rem, 2.5vw, 2.4rem); line-height: 1.18; text-wrap: balance; }
+.journal-masthead > p { max-width: 35rem; margin: clamp(2rem, 5vw, 4rem) 0 3rem 27%; font-family: var(--font-body), -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; font-size: clamp(1.15rem, 1.8vw, 1.6rem); font-weight: 400; line-height: 1.45; text-wrap: balance; color: var(--j-muted); }
 .journal-rule { padding-top: 1rem; border-top: 1px solid var(--j-ink); }
 
 .journal-feature { display: grid; grid-template-columns: minmax(18rem, 37%) 1fr; min-height: 78vh; color: #f2eee5; background: #11110f; }
 .journal-feature-copy { padding: clamp(2rem, 5vw, 5rem) clamp(1rem, 4vw, 4rem); display: flex; flex-direction: column; align-items: flex-start; }
-.journal-kicker { color: #d16f72; font: 700 .66rem/1.2 var(--font-mono), monospace; letter-spacing: .14em; text-transform: uppercase; }
-.journal-feature h2 { margin: auto 0 1.5rem; font-family: var(--font-display), Impact, sans-serif; font-size: clamp(3.2rem, 7vw, 7.4rem); line-height: .85; letter-spacing: .025em; text-transform: uppercase; text-wrap: balance; }
-.journal-feature-copy p { max-width: 32rem; margin: 0 0 2rem; color: #bbb5aa; font: 1rem/1.7 Georgia, serif; }
-.journal-feature-copy > a { padding-bottom: .45rem; border-bottom: 1px solid var(--j-red); font: 700 .7rem/1 var(--font-mono), monospace; letter-spacing: .13em; text-transform: uppercase; }
+.journal-kicker { color: #d16f72; font: 500 .68rem/1.2 var(--font-mono), monospace; letter-spacing: .14em; text-transform: uppercase; }
+.journal-feature h2 { margin: auto 0 1.5rem; font-family: var(--font-display), Impact, sans-serif; font-size: clamp(3.2rem, 7vw, 7.4rem); font-weight: 400; line-height: .96; letter-spacing: .025em; text-transform: uppercase; text-wrap: balance; }
+.journal-feature-copy p { max-width: 32rem; margin: 0 0 2rem; color: #bbb5aa; font-family: var(--font-body), -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; font-size: clamp(1rem, 1.2vw, 1.15rem); line-height: 1.65; }
+.journal-feature-copy > a { padding-bottom: .45rem; border-bottom: 1px solid var(--j-red); font: 500 .72rem/1 var(--font-mono), monospace; letter-spacing: .12em; text-transform: uppercase; }
 .journal-feature-media { position: relative; min-height: 55vh; overflow: hidden; background: #282722; }
 .journal-feature-media img, .journal-feature-media video { width: 100%; height: 100%; object-fit: cover; transition: transform 900ms cubic-bezier(.16,1,.3,1), filter 900ms cubic-bezier(.16,1,.3,1); filter: saturate(.78) contrast(1.05); }
 .journal-feature-media:hover img { transform: scale(1.025); filter: saturate(1) contrast(1); }
-.journal-feature-placeholder { height: 100%; min-height: 60vh; display: grid; place-items: center; font: 900 clamp(2rem, 6vw, 6rem)/1 var(--font-display), Impact, sans-serif; }
+.journal-feature-placeholder { height: 100%; min-height: 60vh; display: grid; place-items: center; font: 400 clamp(2rem, 6vw, 6rem)/1 var(--font-display), Impact, sans-serif; }
 
 .journal-year { padding: clamp(4rem, 9vw, 9rem) clamp(1rem, 3vw, 3rem); border-bottom: 1px solid var(--j-ink); }
 .journal-year-heading { margin-bottom: clamp(3rem, 7vw, 7rem); display: grid; grid-template-columns: 1fr 3fr auto; align-items: end; border-bottom: 1px solid var(--j-ink); }
-.journal-year-heading > span { color: var(--j-red); font: 900 clamp(3.5rem, 8vw, 8rem)/.8 var(--font-display), Impact, sans-serif; }
-.journal-year-heading h2 { margin: 0; font: 900 clamp(2.5rem, 6vw, 6rem)/.8 var(--font-display), Impact, sans-serif; text-transform: uppercase; }
-.journal-year-heading small { padding-bottom: .65rem; font: 700 .65rem/1 var(--font-mono), monospace; letter-spacing: .13em; text-transform: uppercase; }
+.journal-year-heading > span { color: var(--j-red); font: 400 clamp(3.5rem, 8vw, 8rem)/.8 var(--font-display), Impact, sans-serif; }
+.journal-year-heading h2 { margin: 0; font: 400 clamp(2.5rem, 6vw, 6rem)/.8 var(--font-display), Impact, sans-serif; text-transform: uppercase; }
+.journal-year-heading small { padding-bottom: .65rem; font: 500 .65rem/1 var(--font-mono), monospace; letter-spacing: .13em; text-transform: uppercase; }
 .journal-grid { display: grid; grid-template-columns: repeat(12, 1fr); gap: clamp(2rem, 5vw, 6rem) clamp(1rem, 2vw, 2rem); }
 .journal-card { grid-column: span 6; }
 .journal-card.card-1, .journal-card.card-2 { grid-column: span 5; }
@@ -57,39 +57,39 @@
 .journal-card-image { aspect-ratio: 4 / 3; overflow: hidden; background: var(--j-paper-deep); }
 .journal-card-image img, .journal-card-image video { width: 100%; height: 100%; object-fit: cover; transition: transform 700ms cubic-bezier(.16,1,.3,1); }
 .journal-card a:hover .journal-card-image img { transform: scale(1.025); }
-.journal-card-placeholder { display: grid; place-items: center; color: var(--j-muted); font: 900 clamp(1.5rem, 4vw, 4rem)/1 var(--font-display), Impact, sans-serif; }
-.journal-card-meta { margin-top: .9rem; display: flex; justify-content: space-between; color: var(--j-muted); font: 700 .62rem/1.3 var(--font-mono), monospace; letter-spacing: .12em; text-transform: uppercase; }
-.journal-card h3 { max-width: 13ch; margin: .8rem 0 .65rem; font: 900 clamp(2.2rem, 5vw, 5rem)/.88 var(--font-display), Impact, sans-serif; letter-spacing: -.035em; text-transform: uppercase; text-wrap: balance; }
-.journal-card p { max-width: 42rem; color: var(--j-muted); font: .98rem/1.6 Georgia, serif; }
-.journal-read { display: inline-block; margin-top: 1rem; padding-bottom: .25rem; border-bottom: 1px solid var(--j-ink); font: 700 .64rem/1 var(--font-mono), monospace; letter-spacing: .12em; text-transform: uppercase; }
+.journal-card-placeholder { display: grid; place-items: center; color: var(--j-muted); font: 400 clamp(1.5rem, 4vw, 4rem)/1 var(--font-display), Impact, sans-serif; }
+.journal-card-meta { margin-top: .9rem; display: flex; justify-content: space-between; color: var(--j-muted); font: 500 .62rem/1.3 var(--font-mono), monospace; letter-spacing: .12em; text-transform: uppercase; }
+.journal-card h3 { max-width: 13ch; margin: .8rem 0 .65rem; font: 400 clamp(2.2rem, 5vw, 5rem)/.96 var(--font-display), Impact, sans-serif; letter-spacing: -.03em; text-transform: uppercase; text-wrap: balance; }
+.journal-card p { max-width: 42rem; color: var(--j-muted); font-family: var(--font-body), -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; font-size: clamp(0.95rem, 1.1vw, 1.05rem); line-height: 1.6; }
+.journal-read { display: inline-block; margin-top: 1rem; padding-bottom: .25rem; border-bottom: 1px solid var(--j-ink); font: 500 .64rem/1 var(--font-mono), monospace; letter-spacing: .12em; text-transform: uppercase; }
 
 .journal-empty { min-height: 68vh; padding: clamp(5rem, 13vw, 12rem) clamp(1rem, 8vw, 9rem); display: flex; flex-direction: column; align-items: flex-start; justify-content: center; }
-.journal-empty > span { color: var(--j-red); font: 700 .68rem/1 var(--font-mono), monospace; letter-spacing: .14em; text-transform: uppercase; }
-.journal-empty h1, .journal-empty h2 { max-width: 12ch; margin: 1.2rem 0; font: 900 clamp(3.5rem, 10vw, 10rem)/.92 var(--font-display), Impact, sans-serif; line-height: .92; letter-spacing: -.015em; text-transform: uppercase; text-wrap: balance; }
-.journal-empty p { max-width: 34rem; color: var(--j-muted); font: 1.2rem/1.6 Georgia, serif; }
-.journal-empty a { margin-top: 2rem; padding-bottom: .3rem; border-bottom: 2px solid var(--j-red); font: 700 .7rem/1 var(--font-mono), monospace; letter-spacing: .13em; text-transform: uppercase; }
+.journal-empty > span { color: var(--j-red); font: 500 .68rem/1 var(--font-mono), monospace; letter-spacing: .14em; text-transform: uppercase; }
+.journal-empty h1, .journal-empty h2 { max-width: 12ch; margin: 1.2rem 0; font: 400 clamp(3.5rem, 10vw, 10rem)/.92 var(--font-display), Impact, sans-serif; line-height: .92; letter-spacing: -.015em; text-transform: uppercase; text-wrap: balance; }
+.journal-empty p { max-width: 34rem; color: var(--j-muted); font-family: var(--font-body), -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; font-size: 1.15rem; line-height: 1.6; }
+.journal-empty a { margin-top: 2rem; padding-bottom: .3rem; border-bottom: 2px solid var(--j-red); font: 500 .7rem/1 var(--font-mono), monospace; letter-spacing: .13em; text-transform: uppercase; }
 
 .journal-entry-header { width: min(100%, 96rem); min-height: min(68svh, 48rem); margin: 0 auto; padding: clamp(2rem, 5vw, 5rem) clamp(1rem, 6vw, 7rem) 3rem; display: flex; flex-direction: column; }
-.journal-back { align-self: flex-start; padding-bottom: .45rem; border-bottom: 1px solid currentColor; font: 700 .66rem/1 var(--font-mono), monospace; letter-spacing: .12em; text-transform: uppercase; }
-.journal-entry-index { margin-top: clamp(4.5rem, 12vh, 8rem); display: flex; justify-content: space-between; color: var(--j-red); font: 700 .65rem/1 var(--font-mono), monospace; letter-spacing: .14em; text-transform: uppercase; }
-.journal-entry-header h1 { max-width: 14ch; margin: 1.4rem 0 1.7rem; font: 900 clamp(3.6rem, 10vw, 10.5rem)/.82 var(--font-display), Impact, sans-serif; letter-spacing: .025em; text-transform: uppercase; text-wrap: balance; }
-.journal-entry-header > p { max-width: 38rem; margin: 0 0 2.5rem clamp(1rem, 12vw, 12rem); font: clamp(1.2rem, 2vw, 1.85rem)/1.42 Georgia, serif; text-wrap: balance; }
-.journal-entry-meta { width: min(100%, 42rem); display: flex; gap: 2rem; padding-top: 1rem; border-top: 1px solid var(--j-ink); font: 700 .65rem/1 var(--font-mono), monospace; letter-spacing: .12em; text-transform: uppercase; }
+.journal-back { align-self: flex-start; padding-bottom: .45rem; border-bottom: 1px solid currentColor; font: 500 .66rem/1 var(--font-mono), monospace; letter-spacing: .12em; text-transform: uppercase; }
+.journal-entry-index { margin-top: clamp(4.5rem, 12vh, 8rem); display: flex; justify-content: space-between; color: var(--j-red); font: 500 .65rem/1 var(--font-mono), monospace; letter-spacing: .14em; text-transform: uppercase; }
+.journal-entry-header h1 { max-width: 14ch; margin: 1.4rem 0 1.7rem; font: 400 clamp(3.6rem, 10vw, 10.5rem)/.98 var(--font-display), Impact, sans-serif; letter-spacing: .025em; text-transform: uppercase; text-wrap: balance; }
+.journal-entry-header > p { max-width: 38rem; margin: 0 0 2.5rem clamp(1rem, 12vw, 12rem); font-family: var(--font-body), -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; font-size: clamp(1.15rem, 1.8vw, 1.45rem); font-weight: 400; line-height: 1.6; text-wrap: balance; color: var(--j-muted); }
+.journal-entry-meta { width: min(100%, 42rem); display: flex; gap: 2rem; padding-top: 1rem; border-top: 1px solid var(--j-ink); font: 500 .65rem/1 var(--font-mono), monospace; letter-spacing: .12em; text-transform: uppercase; }
 .journal-entry-cover { margin: 0; background: #181816; }
 .journal-entry-cover img, .journal-entry-cover video { display: block; width: 100%; max-height: 88vh; object-fit: cover; }
 .journal-entry-cover figcaption { padding: .7rem 1rem; color: #aaa59b; background: #181816; font: .68rem/1.5 var(--font-mono), monospace; }
 
 .journal-body { padding: clamp(5rem, 10vw, 10rem) 1rem; overflow: hidden; }
 .journal-body > p, .journal-body > h2, .journal-body > h3, .journal-body > blockquote, .journal-link-card, .journal-unavailable { width: min(100%, 43rem); margin-right: auto; margin-left: auto; }
-.journal-body > p { margin-top: 0; margin-bottom: 1.9rem; font: clamp(1.08rem, 1.5vw, 1.3rem)/1.78 Georgia, serif; }
-.journal-body > p:first-child::first-letter { float: left; margin: .08em .12em 0 0; color: var(--j-red); font: 900 5.6rem/.7 var(--font-display), Impact, sans-serif; }
-.journal-body h2 { margin-top: 6rem; margin-bottom: 1.6rem; font: 900 clamp(2.8rem, 6vw, 6rem)/.9 var(--font-display), Impact, sans-serif; letter-spacing: -.01em; text-transform: uppercase; }
-.journal-body h3 { margin-top: 3rem; margin-bottom: 1rem; font: 900 clamp(1.8rem, 3.5vw, 3.2rem)/.92 var(--font-display), Impact, sans-serif; text-transform: uppercase; }
+.journal-body > p { margin-top: 0; margin-bottom: 1.9rem; font-family: var(--font-body), -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; font-size: clamp(1.05rem, 1.35vw, 1.18rem); font-weight: 400; line-height: 1.75; color: #23221f; }
+.journal-body > p:first-child::first-letter { float: left; margin: .05em .15em 0 0; color: var(--j-red); font: 400 5.6rem/.7 var(--font-display), Impact, sans-serif; }
+.journal-body h2 { margin-top: 6rem; margin-bottom: 1.6rem; font: 400 clamp(2.8rem, 6vw, 6rem)/.9 var(--font-display), Impact, sans-serif; letter-spacing: -.01em; text-transform: uppercase; }
+.journal-body h3 { margin-top: 3rem; margin-bottom: 1rem; font: 400 clamp(1.8rem, 3.5vw, 3.2rem)/.92 var(--font-display), Impact, sans-serif; text-transform: uppercase; }
 .journal-body p a { text-decoration: underline; text-decoration-color: var(--j-red); text-underline-offset: .18em; }
 .journal-body blockquote { margin-top: 4rem; margin-bottom: 4rem; padding: 2rem 0 2rem clamp(1rem, 5vw, 4rem); border-top: 1px solid var(--j-ink); border-bottom: 1px solid var(--j-ink); }
-.journal-body blockquote p { margin: 0; font: italic clamp(1.6rem, 3vw, 2.6rem)/1.25 Georgia, serif; }
-.journal-body blockquote cite { display: block; margin-top: 1rem; font: 700 .65rem/1 var(--font-mono), monospace; letter-spacing: .12em; text-transform: uppercase; }
-.journal-pull { max-width: 1100px; margin: clamp(5rem, 11vw, 11rem) auto; color: var(--j-red); font: 900 clamp(3rem, 8vw, 8rem)/.83 var(--font-display), Impact, sans-serif; letter-spacing: -.04em; text-transform: uppercase; text-wrap: balance; }
+.journal-body blockquote p { margin: 0; font-family: var(--font-body), -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; font-style: italic; font-weight: 300; font-size: clamp(1.4rem, 2.4vw, 2.1rem); line-height: 1.4; color: var(--j-ink); }
+.journal-body blockquote cite { display: block; margin-top: 1rem; font: 500 .65rem/1 var(--font-mono), monospace; letter-spacing: .12em; text-transform: uppercase; font-style: normal; }
+.journal-pull { max-width: 1100px; margin: clamp(5rem, 11vw, 11rem) auto; color: var(--j-red); font: 400 clamp(3rem, 8vw, 8rem)/.83 var(--font-display), Impact, sans-serif; letter-spacing: -.04em; text-transform: uppercase; text-wrap: balance; }
 .journal-media-block { width: min(100%, 900px); margin: clamp(4rem, 8vw, 8rem) auto; }
 .journal-media-block.is-wide { width: min(100%, 1200px); }
 .journal-media-block.is-full { width: calc(100% + 2rem); max-width: none; margin-left: -1rem; }
@@ -108,21 +108,21 @@
 .journal-embed { width: min(100%, 1000px); margin: clamp(4rem, 9vw, 9rem) auto; }
 .journal-embed iframe { width: 100%; aspect-ratio: 16 / 9; border: 0; }
 .journal-link-card { padding: 1.5rem 0; display: grid; grid-template-columns: 1fr auto; gap: .4rem 2rem; border-top: 1px solid var(--j-ink); border-bottom: 1px solid var(--j-ink); transition: color 250ms cubic-bezier(.16,1,.3,1); }
-.journal-link-card span { font: 900 1.7rem/1 var(--font-display), Impact, sans-serif; text-transform: uppercase; }
-.journal-link-card small { color: var(--j-muted); font: .9rem/1.5 Georgia, serif; }
+.journal-link-card span { font: 400 1.7rem/1 var(--font-display), Impact, sans-serif; text-transform: uppercase; }
+.journal-link-card small { color: var(--j-muted); font-family: var(--font-body), -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; font-size: .95rem; line-height: 1.55; }
 .journal-link-card b { grid-column: 2; grid-row: 1 / span 2; align-self: center; color: var(--j-red); font-size: 1.5rem; }
 
 .journal-adjacent { display: grid; grid-template-columns: 1fr 1fr; border-top: 1px solid var(--j-ink); border-bottom: 1px solid var(--j-ink); }
 .journal-adjacent > div { min-height: 15rem; padding: 2rem clamp(1rem, 4vw, 4rem); display: flex; align-items: center; }
 .journal-adjacent > div + div { justify-content: flex-end; text-align: right; border-left: 1px solid var(--j-ink); }
 .journal-adjacent a { display: flex; flex-direction: column; gap: .8rem; }
-.journal-adjacent span { color: var(--j-red); font: 700 .62rem/1 var(--font-mono), monospace; letter-spacing: .13em; text-transform: uppercase; }
-.journal-adjacent b { max-width: 13ch; font: 900 clamp(1.7rem, 4vw, 4rem)/.9 var(--font-display), Impact, sans-serif; text-transform: uppercase; }
+.journal-adjacent span { color: var(--j-red); font: 500 .62rem/1 var(--font-mono), monospace; letter-spacing: .13em; text-transform: uppercase; }
+.journal-adjacent b { max-width: 13ch; font: 400 clamp(1.7rem, 4vw, 4rem)/.9 var(--font-display), Impact, sans-serif; text-transform: uppercase; }
 .journal-unavailable { padding: 2rem; border: 1px solid var(--j-red); }
 
 .journal-footer { min-height: 16rem; padding: 3rem clamp(1rem, 3vw, 3rem); display: flex; justify-content: space-between; align-items: flex-end; color: #ded9cf; background: #0d0d0c; }
-.journal-footer p { margin: 0; font: 900 clamp(1.8rem, 4vw, 4rem)/.9 var(--font-display), Impact, sans-serif; text-transform: uppercase; }
-.journal-footer div { display: flex; gap: 1.5rem; font: 700 .65rem/1 var(--font-mono), monospace; letter-spacing: .12em; text-transform: uppercase; }
+.journal-footer p { margin: 0; font: 400 clamp(1.8rem, 4vw, 4rem)/.9 var(--font-display), Impact, sans-serif; text-transform: uppercase; }
+.journal-footer div { display: flex; gap: 1.5rem; font: 500 .65rem/1 var(--font-mono), monospace; letter-spacing: .12em; text-transform: uppercase; }
 
 @keyframes journal-title { from { opacity: 0; transform: translateY(12%); } to { opacity: 1; transform: translateY(0); } }
 

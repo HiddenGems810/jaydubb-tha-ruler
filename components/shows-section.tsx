@@ -1,4 +1,5 @@
 import type { Show } from "@/lib/supabase/queries";
+import { ShowUtilities } from "@/components/show-utilities";
 
 interface ShowsSectionProps {
   shows: Show[];
@@ -52,6 +53,7 @@ export function ShowsSection({ shows }: ShowsSectionProps) {
     },
     performer: {
       "@type": "Person",
+      "@id": "https://jaydubbtharuler.com/#artist",
       name: "JayDubb Tha Ruler",
       url: "https://jaydubbtharuler.com",
     },
@@ -139,6 +141,20 @@ export function ShowsSection({ shows }: ShowsSectionProps) {
                       NOTIFY ME <Arrow />
                     </a>
                   )}
+                  <ShowUtilities
+                    show={{
+                      title: show.title,
+                      venueName: show.venue_name,
+                      address: show.address,
+                      city: show.city,
+                      stateRegion: show.state_region,
+                      country: show.country,
+                      timezone: show.timezone,
+                      eventDate: show.event_date,
+                      ticketUrl: show.ticket_url,
+                      supportingText: show.supporting_text,
+                    }}
+                  />
                 </div>
               </div>
             );
